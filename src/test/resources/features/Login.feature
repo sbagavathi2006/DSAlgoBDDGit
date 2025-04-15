@@ -1,14 +1,14 @@
+
 Feature: Login
 Background:
 	Given User is in Login page after clicking signin in home page
 	
-	  Scenario Outline: User receives an alert while clicks on Login button with "<Username>" and "<Password>"
-    When User clicks Login button with "<Username>" and "<Password>"
-    Then User User gets an alert "<Message>" appears below Password textbox
+	 Scenario Outline: User receives an alert while clicks on Login button with "<username>" and "<password>"
+    When User clicks Login button with "<username>" and "<password>"
+    Then User User gets an alert "<messages>" appears below Password textbox
 
     Examples:
-      | Username   | Password   		| Message                       |
-      |            |            		| Please fill out this field   	|
+      | username   | password   		| messages                      |
       | asxcvb     |            		| Please fill out this field    |
       |            | greenHorn@2024 | Please fill out this field    |
       | 14dece     | greenHorn@2024 | Invalid username and password |

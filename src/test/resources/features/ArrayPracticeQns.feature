@@ -1,62 +1,49 @@
+
+@afterSignIn
 Feature: ArrayPraticeQns
 Background:
 	Given User is on pratice page after clicks on Pratice Questions link from Applications of Array page
-	
-  Scenario: User lands on question one page when clicks on Search the array link
-  	When User clicks on Search the array link
-    Then User redirected to question one page
-       
-  Scenario: User able to see Run button when clicks on Search the array link
-  	When User clicks on Search the array link to see Run button
-    Then User able to see Run button on Search the array link
-    
-  Scenario: User able to see Submit button when clicks on Search the array link
-  	When User clicks on Search the array link to see Submit
-    Then User able to see Submit button on Search the array link
-       
-  Scenario: User lands on question two page when clicks on Max Consecutive Ones link
-  	When User clicks on Max Consecutive Ones link
-    Then User redirected to question two page
-    
-   Scenario: User able to see Run button when clicks on Max Consecutive Ones link
-  	When User clicks on  on Max Consecutive Ones to see Run button
-    Then User able to see Run button  on Max Consecutive Ones
-    
-  Scenario: User able to see Submit button when clicks on Max Consecutive Ones link
-  	When User clicks on  on Max Consecutive Ones to see Submit
-    Then User able to see Submit button  on Max Consecutive Ones
-    
-  Scenario: User lands on question three page when clicks on Find Numbers with Even Number of Digits link
-  	When User clicks on Find Numbers with Even Number of Digits link
-    Then User redirected to question three page
-    
-   Scenario: User able to see Run button when clicks on Find Numbers with Even Number of Digits link
-  	When User clicks on Find Numbers with Even Number of Digits link
-    Then User able to see Run button Find Numbers with Even Number of Digits link
-    
-  Scenario: User able to see Submit button when clicks on Find Numbers with Even Number of Digits link
-  	When User clicks on Find Numbers with Even Number of Digits link to see Submit
-    Then User able to see Submit button on Find Numbers with Even Number of Digits link
-    
-  Scenario: User lands on question four page when clicks on Squares of a Sorted Array link
-  	When User clicks on Squares of a Sorted Array link
-    Then User redirected to question four page
-    
-  Scenario: User able to see Run button when clicks on Squares of a Sorted Array link
-  	When User clicks on Squares of a Sorted Array link to see Run button
-    Then User able to see Run button on Squares of a Sorted Array link
-    
-  Scenario: User able to see Submit button when clicks on Squares of a Sorted Array link
-  	When User clicks on Squares of a Sorted Array link to see Submit
-    Then User able to see Submit button on Squares of a Sorted Array link
-    
- 	Scenario Outline: User gets an message when clicks on Run button with "<CodeValidations>" code snippet for "<Questions>"
- 		Given User is on "<Questions>" page after clicks on "<Questions>" Link
-    When User click on run button with "<CodeValidations>" code snippet
-    Then User gets an message "<Message>"
+     
+  Scenario Outline: User navigates to question pages correctly
+    When User clicks on "<linkText>" Link
+    Then User is redirected to "<questionPage>" Page
 
     Examples:
-      | Questions   														 |CodeValidations   		| Message                      		  |
+      | linkText                                | questionPage     |
+      | Search the array                        | question one     |
+      | Max Consecutive Ones                    | question two     |
+      | Find Numbers with Even Number of Digits | question three   |
+      | Squares of a Sorted Array               | question four    |
+
+  Scenario Outline: User is able to see Run button on each question page
+    When User clicks on "<linkText>" Link
+    Then User is able to see Run button
+
+    Examples:
+      | linkText                                |
+      | Search the array                        |
+      | Max Consecutive Ones                    |
+      | Find Numbers with Even Number of Digits |
+      | Squares of a Sorted Array               |
+
+  Scenario Outline: User is able to see Submit button on each question page
+    When User clicks on "<linkText>" Link
+    Then User is able to see Submit button
+
+    Examples:
+      | linkText                                |
+      | Search the array                        |
+      | Max Consecutive Ones                    |
+      | Find Numbers with Even Number of Digits |
+      | Squares of a Sorted Array               |   
+     
+ 	Scenario Outline: User gets an message when clicks on Run button with "<codeValidations>" code snippet for "<questions>"
+ 		Given User is on "<questions>" page after clicks on "<questions>" Link
+    When User click on run button with "<codeValidations>" code snippet
+    Then User gets an message "<message>"
+
+    Examples:
+      |  questions   														 |codeValidations   		| message                      		  |
       |  Search the array         							 |ExistingCodeSnippet   | SyntaxError: bad input on lineTwo |
       |  Search the array          							 |InvalidCodeSnippet    | SyntaxError: bad input   					|
      	|  Search the array          							 |VaildCodeSnippet      | Output below Run button   				|
@@ -71,13 +58,13 @@ Background:
      	|  Squares of a Sorted Array          		 |VaildCodeSnippet     	| Output below Run button   				|
     
   
-  Scenario Outline: User gets an  message "<Message>" when clicks on Submit button with "<CodeValidations>" code snippet for "<Questions>"
- 		Given User is on "<Questions>" after clicks on "<Questions>" Link
-    When User click on submit button with "<CodeValidations>" code snippet
-    Then User gets "<Message>" message
+  Scenario Outline: User gets an  message "<Message>" when clicks on Submit button with "<codeValidations>" code snippet for "<questions>"
+ 		Given User is on "<questions>" after clicks on "<questions>" Link
+    When User click on submit button with "<codeValidations>" code snippet
+    Then User gets "<message>" message
 
     Examples:
-      | Questions   														 |CodeValidations   		| Message                      		  |
+      | questions   														 |codeValidations   		| message                      		  |
       |  Search the array         							 |ExistingCodeSnippet   | Error occurred during submission 	|
       |  Search the array          							 |InvalidCodeSnippet    | Error occurred during submission 	|
      	|  Search the array          							 |VaildCodeSnippet      | Success    												|
@@ -91,5 +78,3 @@ Background:
       |  Squares of a Sorted Array           		 |InvalidCodeSnippet    | Error occurred during submission  |
      	|  Squares of a Sorted Array          		 |VaildCodeSnippet     	| Success									   				|
     
-  
-  
