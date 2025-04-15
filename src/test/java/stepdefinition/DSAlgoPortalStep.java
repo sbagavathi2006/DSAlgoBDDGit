@@ -6,19 +6,23 @@ import io.cucumber.java.en.When;
 
 public class DSAlgoPortalStep {
 	
-	@Given("User has browser open")
-	public void user_has_browser_open() {
+	@Given("User is on the DS Algo Portal")
+	public void user_is_on_the_ds_algo_portal() {
 
 	}
 
-	@When("User enter correct dsAlgo portal URL")
-	public void user_enter_correct_ds_algo_portal_url() {
+	@When("User clicks the Get Started button")
+	public void user_clicks_the_get_started_button() {
 
 	}
 
-	@Then("User is redirected to dsAlgo portal with Get Started button enabled")
-	public void user_is_redirected_to_ds_algo_portal_with_get_started_button_enabled() {
-
+	@Then("User is redirected to home page")
+	public void user_is_redirected_to_home_page() {
+	
 	}
 
+	@Then("User should see {string} on the home page")
+	public void user_should_see_on_the_home_page(String string) {
+
+	}
 }

@@ -1,5 +1,4 @@
-package stepdefinition;
-
+package stepdefinition
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -26,8 +25,5 @@ public class LogoutStep {
 	public void the_user_clicks_the_link(String string) {
 	   
 	}
-
-
-
 
 }
