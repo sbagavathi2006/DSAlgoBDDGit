@@ -1,3 +1,4 @@
+
 Feature: Home
 Background:
 	Given User is in home Page after clicking get started button in DS Algo page
@@ -6,28 +7,31 @@ Background:
   	When User clicks NumpyNinja link
     Then Home page is refreshed
        
-  Scenario: User able to navigate to Register page
-  	When User clicks Register link 
-    Then User is redirected to the Register page
+  Scenario Outline: User able to navigate to Register, Sign in page
+  	When User clicks "<links>" link 
+    Then User is redirected to the "<pages>" page
     
-  Scenario: User able to navigate to Sign in page
-  	When User clicks Sign in link 
-    Then User is redirected to Login page
+		Examples:
+		  | links     | pages    |
+		  | Register  | Register |
+		  | Sign in   | Login    |
     
-  Scenario: User able to view Data Structures dropdown options on home page without signing in
-  	When User clicks the Data Structures dropdown 
-    Then User should sees six options Arrays, Linked List, Stack, Queue, Tree, Graph in dropdown menu
+  Scenario: User views all Data Structures dropdown options without signing in
+	  When User clicks the Data Structures dropdown
+	  Then User sees the following options in the dropdown:
+	    | Arrays      |
+	    | Linked List |
+	    | Stack       |
+	    | Queue       |
+	    | Tree        |
+	    | Graph       |
     
-  Scenario: User should see Data structure dropdown in the home page
-  	When User clicks the Get Started button
-    Then User should see Data structure dropdown
-    
-  Scenario Outline: User sees alert while selecting "<DSDropdownOptions>" from the drop down without signing in
-    When User selects "<DSDropdownOptions>" from the drop down
-    Then User views an alert "<Message>" for the dropdown
+  Scenario Outline: User sees alert while selecting "<dsDropdownOptions>" from the drop down without signing in
+    When User selects "<dsDropdownOptions>" from the drop down
+    Then User views an alert "<message>" for the dropdown
 
     Examples: 
-      | DSDropdownOptions | Message 							 |
+      | dsDropdownOptions | message 							 |
       | Arrays						|  You are not logged in |
       | Linked List 			|  You are not logged in |
       | Stack 						|  You are not logged in |
@@ -35,12 +39,12 @@ Background:
       | Tree  						|  You are not logged in |
       | Graph 						|  You are not logged in |
   
-   Scenario Outline: User sees alert while clicks Get Started button on "<FlexOptions>" flex without signing in
-    When User clicks Get Started button on "<FlexOptions>" flex
-    Then User views an alert "<Message>" for the flex
+   Scenario Outline: User sees alert while clicks Get Started button on "<flexOptions>" flex without signing in
+    When User clicks Get Started button on "<flexOptions>" flex
+    Then User views an alert "<messages>" for the flex
 
     Examples: 
-      | FlexOptions						 			 | Message 							  |
+      | flexOptions						 			 | messages 							|
       | Data Structures-Introduction |	You are not logged in |
       | Array 											 |  You are not logged in |
       | Linked List 								 |  You are not logged in |
