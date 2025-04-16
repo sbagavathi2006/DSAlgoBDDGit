@@ -14,12 +14,15 @@ import utilities.ConfigReader;
 import webdriver.DriverFactory;
 
 ///public class Hooks {
-	/*this is one base class becz every scenario frist it will execute @befrore and @after*/
-	
+	/*this is one base class becz every scenario frist it will execute @befrore and 
 	//private DriverFactory driverFactory;//this three private becz this hooks only call this things
 	//private WebDriver driver;
 	//private ConfigReader configReader=new ConfigReader();
 	//Properties prop;
+	/*private DriverFactory driverFactory;//this three private becz this hooks only call this things
+	private WebDriver driver;
+	private ConfigReader configReader=new ConfigReader();
+	Properties prop;
 	
 	//@Before(order =0)//browser is calling from config.propertis
 	//public void getProperty() {
@@ -48,12 +51,18 @@ import webdriver.DriverFactory;
 	//@After(order=1)
 	//public void tearDown(Scenario scenario){
 		//if(scenario.isFailed()) {//scenario is failed then its take a screen shorts
-//			take screenshot:
+//			take screenshorts
 			//String screenshotName = scenario.getName().replaceAll("", "_");
 			//byte [] sourcePath=((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);//takes the screen short it stored into under the source path
 			//scenario.attach(sourcePath, "image/png", screenshotName);//screenshorts attetched in extend reports whatever reports
 //}
 	//}
+//}
+			String screenshotName = scenario.getName().replaceAll("", "_");
+			byte [] sourcePath=((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);//takes the screen short it stored into under the source path
+			scenario.attach(sourcePath, "image/png", screenshotName);//screenshorts attetched in extend reports whatever reports
+//}
+	//}*/
 //}
 /*finally first before=0,will excute and next before=1 will execute  that is launch browser and next after=1 will execute (becz while execute the scenarios
 first launch the browser and then some failed test cases take a screenshorts and after=0 will execute after=0 is quit browser)*/
