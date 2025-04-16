@@ -23,22 +23,26 @@ public class DriverFactory {
 			System.out.println("browser value is :" + browser);
 			
 			if(browser.equals("chrome")) {
-				 WebDriverManager.chromedriver().setup();
+				 //WebDriverManager.chromedriver().setup();
+				 driver = new ChromeDriver();
 				 tlDriver.set(new ChromeDriver());//tl give the set method and get method, this is set method,here tl set the chromebrowser//whenever u set the chrome driver it automaticaly set the tl
 			}
 			
 			else if(browser.equals("firefox")) {  //next browser
-				 WebDriverManager.firefoxdriver().setup();
+				 //WebDriverManager.firefoxdriver().setup();
+				 driver = new FirefoxDriver();
 				 tlDriver.set(new FirefoxDriver());
 			}
 			
 			else if(browser.equals("safari")) {
-				 WebDriverManager.safaridriver().setup();
+				// WebDriverManager.safaridriver().setup();
+				 driver = new SafariDriver();
 				 tlDriver.set(new SafariDriver());
 			}
 			
 			else if(browser.equals("edge")) {
-				 WebDriverManager.edgedriver().setup();
+				 //WebDriverManager.edgedriver().setup();
+				 driver = new EdgeDriver();
 				 tlDriver.set(new EdgeDriver());
 			}
 			

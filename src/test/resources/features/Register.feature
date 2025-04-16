@@ -30,17 +30,22 @@ Background:
     Then the error message "Your password must contain at least 8 characters." is displayed
     
     
-  Scenario Outline: Verify that user receives error message while clicking the "<Username>" and "<Password>" and "<Password>" Confirmation field during registration
-    When the user clicks the Register button with "<Username>" and "<Password>" and different  "<Password>" Confirmation fields and clicks the Register button
-    Then the  "<errormessage>" "password_mismatch:The two password fields didn’t match." is displayed
+  Scenario Outline: Verify that the user receives an error message for invalid username formats during registration
+       When  user clicks the Register button after entering a username <username>
+       Then  user should see an error message indicating that the username <error_message>
     Examples:
-       |   Username	         |  Password       | conformpassword    |       error_message                                      |
-       |                     |	               |                    |   please fill out this fiels                             |
-       |  Numpy123           |  QAtech@03      |                    |   please fill out this fields                            |
-       |  Numpy123           |  QAtech@03      | 12345678           |   password_mismatch:The two password fields didn’t match |
-       |  Numpy123           |  QAtech@03      | QAtech@03          |   password_mismatch:The two password fields didn’t match  |
+       |   username	             |        error_message                     | 
+       |"username with spaces"   |	 "Username cannot contain spaces"       |    
+       | "username@!invalid"	   |   "Username contains invalid characters" |
+       |"toolongusername1234567" |   "Username exceeds the character limit" |
+       |   "username#special"	   |    "Username contains invalid characters"|
     
-
+     
+    Scenario: verify Successful registration with valid details
+    When     user clicks Register button after entering  with valid username, password and password confirmation in related textboxes 
+    Then     user should be redirected to Home Page of DS Algo with message New Account Created You are logged in as username Data Structures
+            
+    
  Scenario: Verify that user able to Navigate to Sign in page from Register page
    When the user clicks the "Login" link on the Register page
    Then the user should be navigated to the "Sign in" page
