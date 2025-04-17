@@ -16,29 +16,13 @@ public class DSAlgoPortalStep {
 
 	}
 
-	@Then("User is redirected to the home page")
-	public void user_is_redirected_to_the_home_page() {
-
+	@Then("User is redirected to home page")
+	public void user_is_redirected_to_home_page() {
+	
 	}
 
-	@Then("User able to see NumpyNinja link")
-	public void user_able_to_see_numpy_ninja_link() {
+	@Then("User should see {string} on the home page")
+	public void user_should_see_on_the_home_page(String string) {
 
 	}
-
-	@Then("User able to see Register link")
-	public void user_able_to_see_register_link() {
-
-	}
-
-	@Then("User able to see Sign in link")
-	public void user_able_to_see_sign_in_link() {
-
-	}
-
-	@Then("User should see Data structure dropdown")
-	public void user_should_see_data_structure_dropdown() {
-
-	}
-
 }
