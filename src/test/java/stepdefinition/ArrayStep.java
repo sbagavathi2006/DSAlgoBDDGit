@@ -11,8 +11,8 @@ public class ArrayStep {
 	
 	}
 
-	@When("User clicks on {string} link")
-	public void user_clicks_on_link(String string) {
+	@When("User clicks on {string} array links")
+	public void user_clicks_on_array_links(String string) {
 
 	}
 
