@@ -11,22 +11,23 @@ Background:
     
     Examples:
       | dropdownOptions	| pages       |
-      | Arrays       		| arrays      |
-      | Linked List  		| linked list |
+      | Arrays       		| array       |
+      | Linked-List  		| linked-list |
       | Stack   			  | stack      	|
       | Queue      	 		| queue       |
       | Tree      		  | tree        |
       | Graph     	 		| graph       |
 
+	@Run
    Scenario Outline: User redirected to "<pages>" page from "<panelOptions>" panel
     When User clicks on Getting Started button in "<panelOptions>" panel
     Then User is redirected to "<pages>" page
     
     Examples:
       | panelOptions								| pages       								|
-      | Data Structures Introduction| data structures introduction|
-      | Arrays       								| arrays      								|
-      | Linked List  								| linked list 								|
+      | Data-Structures-Introduction| data-structures-introduction|
+      | Array       								| array      								  |
+      | Linked-List  								| linked-list 								|
       | Stack   			  						| stack      									|
       | Queue      	 								| queue       								|
       | Tree      		  						| tree        								|
