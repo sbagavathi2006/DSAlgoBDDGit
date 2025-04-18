@@ -1,44 +1,31 @@
 package webdriver;
-
 import java.time.Duration;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-
 public class DriverFactory {
 	
-
-		public WebDriver driver;
-		public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
-		/*This method is used to initialize the thread local driver on the basis of given browser
-		 * this will reurn tldriver
-		 anytime will execute the parallel test so will give threadlocal and initialize the webdriver it help of tl*/
-		    
-		public WebDriver init_driver(String browser) {//initialize the browser and this driver object calling from hooks
+		public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>(); //each thread gets its own instance for parallel testing
+		   
+		public WebDriver init_driver(String browser) { //Initializes the WebDriver based on the given browser name
 			System.out.println("browser value is :" + browser);
 			
-			if(browser.equals("chrome")) {
-				 WebDriverManager.chromedriver().setup();
-				 tlDriver.set(new ChromeDriver());//tl give the set method and get method, this is set method,here tl set the chromebrowser//whenever u set the chrome driver it automaticaly set the tl
+			if(browser.equalsIgnoreCase("chrome")) {
+				 tlDriver.set(new ChromeDriver());//Assign ChromeDriver to the current thread's WebDriver
 			}
 			
-			else if(browser.equals("firefox")) {  //next browser
-				 WebDriverManager.firefoxdriver().setup();
+			else if(browser.equals("firefox")) {  
 				 tlDriver.set(new FirefoxDriver());
 			}
 			
-			else if(browser.equals("safari")) {
-				 WebDriverManager.safaridriver().setup();
+			else if(browser.equals("safari")) {				 
 				 tlDriver.set(new SafariDriver());
 			}
 			
 			else if(browser.equals("edge")) {
-				 WebDriverManager.edgedriver().setup();
 				 tlDriver.set(new EdgeDriver());
 			}
 			
@@ -46,19 +33,13 @@ public class DriverFactory {
 				System.out.println("Please pass the correct browser");
 			}
 			
-			getDriver().manage().deleteAllCookies();  
-			getDriver().manage().window().maximize(); //return the driver giving webdriver
+			getDriver().manage().deleteAllCookies();
+			getDriver().manage().window().maximize(); 
 			getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-			return getDriver();
+			return getDriver(); // Return the initialized driver
 		}
 		
-		//this is used to get the driver with thread local
-		public static synchronized WebDriver getDriver() { //this getmethod is return getdriver
+		public static WebDriver getDriver() { // Returns the WebDriver instance for the current thread
 			return tlDriver.get();
-			       /*some one calling the getdriver its return the tl instant ,tl instant is already initialize chrome,fire*/
-			       /*in parallel time 5 browser is open side by side so we gave synchronize its esy*/
 		}
 	}
-
-
-
