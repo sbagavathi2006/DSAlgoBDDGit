@@ -10,50 +10,65 @@ import org.openqa.selenium.WebDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import pagefactory.DSAlgoPortalPage;
+import pagefactory.HomePage;
+import pagefactory.LoginPage;
 import utilities.ConfigReader;
 import webdriver.DriverFactory;
 
 public class Hooks {
-	/*this is one base class becz every scenario frist it will execute @befrore and @after*/
-	
-	/*private DriverFactory driverFactory;//this three private becz this hooks only call this things
+
 	private WebDriver driver;
-	private ConfigReader configReader=new ConfigReader();
+	private ConfigReader configReader;
 	Properties prop;
+	private DriverFactory driverFactory;
 	
-	@Before(order =0)//browser is calling from config.propertis
-	public void getProperty() {
+	@Before(order =0)//Execute first
+	public void getProperty() { //reads configuration values browser, URL from the config.properties file using the ConfigReader utility.
 		configReader=new ConfigReader();
-		prop =configReader.init_prop();//initialize the prop
+		prop =configReader.init_prop();// Load properties into prop
+	}
+	 
+	@Before(order =1)//Execute second
+	public void launchbrowser() { //Launch browser and open the base URL which are fetched from the loaded properties
+		String browsername=prop.getProperty("browser"); //get browser name from confg.properties
+		String urlname=prop.getProperty("url");
+		driverFactory = new DriverFactory();  // Initialize the driver factory
+		driver = driverFactory.init_driver(browsername); // Launch the browser
+		DriverFactory.getDriver().get(urlname); // Navigate to the base URL
 	}
 	
-	@Before(order =1)//launch the browser
-	public void launchbrowser() {
-		String browsername=prop.getProperty("browser");//get browser name from confg.prop
-		String urlname=prop.getProperty("url");
-		driverFactory = new DriverFactory();//object for driver class
-		driver= driverFactory.init_driver(browsername);//object creation then call browser name
-		DriverFactory.getDriver().get(urlname);
-
-}
-	@After(order =0)//every scenario quit the browser
-	public void quitBrowser() {
-		 if (driver != null) {
-
-		        driver.quit(); // Quit the browser only if it's initialized
-		    
+//	@After("@afterSignIn")
+//	public void loginBeforeAfterSignInScenarios() {
+//	    // Perform login here
+//	    driver = DriverFactory.getDriver();
+//
+//	    DSAlgoPortalPage portalPage = new DSAlgoPortalPage(driver);
+//	    HomePage homePage = new HomePage(driver);
+//	    LoginPage loginPage = new LoginPage(driver);
+//
+//	    portalPage.getStartedBtnClick();
+//	    homePage.signInLinkClick();
+//	    loginPage.enterUserName(); // You can also pass hardcoded or config-based credentials
+//	    loginPage.enterPwd();
+//	    loginPage.loginBtnClick();
+//	}
+	
+	@After(order=1) //execute before closing the browser
+	public void tearDown(Scenario scenario){ //Take a screenshot automatically if a scenario fails
+		if(scenario.isFailed()) {
+			String screenshotName = scenario.getName().replaceAll("", "_");
+			byte [] sourcePath=((TakesScreenshot)DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES); 
+			scenario.attach(sourcePath, "image/png", screenshotName);
+		}
+	}
+	
+	@After(order =0) // execute last
+	public void quitBrowser() { //Quits the browser and removes the thread-local WebDriver instance
+		 if (DriverFactory.getDriver() != null) {
+		        DriverFactory.getDriver().quit(); // Close the browser
+		        DriverFactory.tlDriver.remove(); // Clean up ThreadLocal driver
 		    }
     }
-	
-	@After(order=1)
-	public void tearDown(Scenario scenario){
-		if(scenario.isFailed()) {//scenario is failed then its take a screen shorts
-//			take screenshot:
-			String screenshotName = scenario.getName().replaceAll("", "_");
-			byte [] sourcePath=((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);//takes the screen short it stored into under the source path
-			scenario.attach(sourcePath, "image/png", screenshotName);//screenshorts attetched in extend reports whatever reports
+
 }
-	}*/
-}
-/*finally first before=0,will excute and next before=1 will execute  that is launch browser and next after=1 will execute (becz while execute the scenarios
-first launch the browser and then some failed test cases take a screenshorts and after=0 will execute after=0 is quit browser)*/

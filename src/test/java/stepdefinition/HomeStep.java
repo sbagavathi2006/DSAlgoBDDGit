@@ -1,13 +1,23 @@
 package stepdefinition;
 
+import org.openqa.selenium.WebDriver;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pagefactory.DSAlgoPortalPage;
+import pagefactory.HomePage;
+import webdriver.DriverFactory;
 
 public class HomeStep {
+	
+	private WebDriver driver = DriverFactory.getDriver(); //get the driver from DriverFactory;
+	private DSAlgoPortalPage portalPage = new DSAlgoPortalPage(driver); //initialize the page object;
+	private HomePage homePage = new HomePage(driver);
+	
 	@Given("User is in home Page after clicking get started button in DS Algo page")
 	public void user_is_in_home_page_after_clicking_get_started_button_in_ds_algo_page() {
-
+		portalPage.getStartedBtnClick();
 	}
 
 	@When("User clicks NumpyNinja link")
@@ -21,8 +31,9 @@ public class HomeStep {
 	}
 
 	@When("User clicks {string} link")
-	public void user_clicks_link(String string) {
-
+	public void user_clicks_link(String linkText) {
+		homePage.clickLink(linkText);
+		
 	}
 
 	@Then("User is redirected to the {string} page")

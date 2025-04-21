@@ -1,4 +1,5 @@
 
+@Home
 Feature: Home
 Background:
 	Given User is in home Page after clicking get started button in DS Algo page
@@ -6,7 +7,8 @@ Background:
   Scenario: Home page refreshed  when click on NumpyNinja link
   	When User clicks NumpyNinja link
     Then Home page is refreshed
-       
+  
+  @Home     
   Scenario Outline: User able to navigate to Register, Sign in page
   	When User clicks "<links>" link 
     Then User is redirected to the "<pages>" page
