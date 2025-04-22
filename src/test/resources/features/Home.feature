@@ -8,15 +8,14 @@ Background:
   	When User clicks NumpyNinja link
     Then Home page is refreshed
   
-  @Home     
   Scenario Outline: User able to navigate to Register, Sign in page
   	When User clicks "<links>" link 
     Then User is redirected to the "<pages>" page
     
 		Examples:
 		  | links     | pages    |
-		  | Register  | Register |
-		  | Sign in   | Login    |
+		  | Register  | register |
+		  | Sign in   | login    |
     
   Scenario: User views all Data Structures dropdown options without signing in
 	  When User clicks the Data Structures dropdown
@@ -30,27 +29,27 @@ Background:
     
   Scenario Outline: User sees alert while selecting "<dsDropdownOptions>" from the drop down without signing in
     When User selects "<dsDropdownOptions>" from the drop down
-    Then User views an alert "<message>" for the dropdown
+    Then User views an alert "<message>"
 
     Examples: 
       | dsDropdownOptions | message 							 |
-      | Arrays						|  You are not logged in |
-      | Linked List 			|  You are not logged in |
-      | Stack 						|  You are not logged in |
-      | Queue				 			|  You are not logged in |
-      | Tree  						|  You are not logged in |
-      | Graph 						|  You are not logged in |
+      | arrays						|  You are not logged in |
+      | linked list 			|  You are not logged in |
+      | stack 						|  You are not logged in |
+      | queue				 			|  You are not logged in |
+      | tree  						|  You are not logged in |
+      | graph 						|  You are not logged in |
   
    Scenario Outline: User sees alert while clicks Get Started button on "<flexOptions>" flex without signing in
     When User clicks Get Started button on "<flexOptions>" flex
-    Then User views an alert "<messages>" for the flex
+    Then User views an alert "<messages>"
 
     Examples: 
       | flexOptions						 			 | messages 							|
-      | Data Structures-Introduction |	You are not logged in |
-      | Array 											 |  You are not logged in |
-      | Linked List 								 |  You are not logged in |
-      | Stack 											 |  You are not logged in |
-      | Queue				 								 |  You are not logged in |
-      | Tree  											 |  You are not logged in |
-      | Graph 											 |  You are not logged in |
+      | data-structures-introduction |	You are not logged in |
+      | array 											 |  You are not logged in |
+      | linked-list 								 |  You are not logged in |
+      | stack 											 |  You are not logged in |
+      | queue				 								 |  You are not logged in |
+      | tree  											 |  You are not logged in |
+      | graph 											 |  You are not logged in |

@@ -8,35 +8,39 @@ import org.openqa.selenium.support.PageFactory;
 public class DSOptionsPage {
 	
 private WebDriver driver;
-	
-	@FindBy(xpath = "//a[contains(text(), \"Asxcvb\")]") 
-	private WebElement loggedInUserName;
-	
-	@FindBy(xpath = "//a[contains(text(), \"Sign out\")]") 
-	private WebElement signout;
-	
-	@FindBy(xpath = "//div[contains(text(), \"You are logged in\")]") 
-	private WebElement loginSuccessAlert;
-	
-	@FindBy(xpath = "//a[@href=\"data-structures-introduction\"]") 
-	private WebElement dsIntroGetStartBtn;
-	
-	@FindBy(xpath = "//a[@href=\"array\"]") 
-	private WebElement arrayGetStartBtn;
-	
-	@FindBy(xpath = "//a[@href=\"linked-list\"]") 
-	private WebElement linkedListGetStartBtn;
-	
-	@FindBy(xpath = "//a[@href=\"stack\"]") 
-	private WebElement stackGetStartBtn;
-	
-	@FindBy(xpath = "//a[@href=\"queue\"]") 
-	private WebElement queueGetStartBtn;
-	
-	@FindBy(xpath = "//a[@href=\"tree\"]") 
-	private WebElement treeGetStartBtn;
-	
-	@FindBy(xpath = "//a[@href=\"graph\"]") 
+	@FindBy(css = "ul > a:nth-child(2)")
+	private WebElement loggedInUserName;	
+	@FindBy(xpath = "//a[contains(text(), 'Sign out')]") 
+	private WebElement signout;	
+	@FindBy(xpath = "//div[contains(text(), 'You are logged in')]") 
+	private WebElement loginSuccessAlert;	
+	@FindBy(xpath = "//a[@class='nav-link dropdown-toggle']")
+	private WebElement dsDropdown;
+	@FindBy (xpath ="//div[@class='dropdown-menu show']//a[text()='Arrays']")
+	private WebElement ddArraysOpt;	
+	@FindBy (xpath ="//div[@class='dropdown-menu show']//a[text()='Linked List']")
+	private WebElement ddLinkedListOpt;	
+	@FindBy (xpath ="//div[@class='dropdown-menu show']//a[text()='Stack']")
+	private WebElement ddStackOpt;	
+	@FindBy (xpath ="//div[@class='dropdown-menu show']//a[text()='Queue']")
+	private WebElement ddQueueOpt;
+	@FindBy (xpath ="//div[@class='dropdown-menu show']//a[text()='Tree']")
+	private WebElement ddTreeOpt;
+	@FindBy (xpath ="//div[@class='dropdown-menu show']//a[text()='Graph']")
+	private WebElement ddGraphOpt;	
+	@FindBy(xpath = "//a[@href='data-structures-introduction']") 
+	private WebElement dsIntroGetStartBtn;	
+	@FindBy(xpath = "//a[@href='array']") 
+	private WebElement arrayGetStartBtn;	
+	@FindBy(xpath = "//a[@href='linked-list']") 
+	private WebElement linkedListGetStartBtn;	
+	@FindBy(xpath = "//a[@href='stack']") 
+	private WebElement stackGetStartBtn;	
+	@FindBy(xpath = "//a[@href='queue']") 
+	private WebElement queueGetStartBtn;	
+	@FindBy(xpath = "//a[@href='tree']") 
+	private WebElement treeGetStartBtn;	
+	@FindBy(xpath = "//a[@href='graph']") 
 	private WebElement graphGetStartBtn;
 	
 	public DSOptionsPage (WebDriver driver) {
@@ -44,15 +48,51 @@ private WebDriver driver;
         PageFactory.initElements(driver, this); //initialize all the WebElements that are annotated with @FindBy
 	}
 	
-	public boolean getLoginSuccessMsg() {
-		return loginSuccessAlert.isDisplayed();
-	}
-	public String getNumpyNinjaPageTitle() {
+	public String getTitle() {
 		return driver.getTitle();
 	}
 	
-	// Generic method to click on "Getting Started" button based on panel name
-		public void clickGettingStartedForPanel(String panelName) {
+	public boolean getLoginSuccessMsg() {
+		return loginSuccessAlert.isDisplayed();
+	}
+	
+	
+	public String loggedInUser() {		
+		return loggedInUserName.getText().trim();
+	}
+	
+	public boolean signoutLinkDisplayed() {
+		return signout.isDisplayed();
+	}
+	
+	public void selectDropdownOptions() {
+		dsDropdown.click();
+	}
+	public void clickDropdownList(String panelName) {
+		switch (panelName.trim().toLowerCase()) {
+			case "arrays":
+				ddArraysOpt.click();
+				break;
+			case "linked-list":
+				ddLinkedListOpt.click();
+				break;
+			case "stack":
+				ddStackOpt.click();
+				break;
+			case "queue":
+				ddQueueOpt.click();
+				break;
+			case "tree":
+				ddTreeOpt.click();
+				break;
+			case "graph":
+				ddGraphOpt.click();
+				break;
+			default:
+				throw new IllegalArgumentException("Invalid options name: " + panelName);
+		}
+	}
+	public void clickGettingStartedForPanel(String panelName) {
 			switch (panelName.trim().toLowerCase()) {
 				case "data-structures-introduction":
 					dsIntroGetStartBtn.click();
@@ -80,32 +120,39 @@ private WebDriver driver;
 			}
 		}
 	
-	public void dsIntroGetStartBtnClick() {
+	public DataStructurePage dsIntroGetStartBtnClick() {
 		dsIntroGetStartBtn.click();
+		return new DataStructurePage(driver);
 	}
 	
-	public void arrayGetStartBtnClick() {
+	public ArrayPage arrayGetStartBtnClick() {
 		arrayGetStartBtn.click();
+		return new ArrayPage(driver);
 	}
 	
-	public void linkedListGetStartBtnClick() {
+	public LinkedListPage linkedListGetStartBtnClick() {
 		linkedListGetStartBtn.click();
+		return new LinkedListPage(driver);
 	}
 	
-	public void stackGetStartBtnClick() {
+	public StackPage stackGetStartBtnClick() {
 		stackGetStartBtn.click();
+		return new StackPage(driver);
 	}
 	
-	public void queueGetStartBtnClick() {
+	public QueuePage queueGetStartBtnClick() {
 		queueGetStartBtn.click();
+		return new QueuePage(driver);
 	}
 	
-	public void treeGetStartBtnClick() {
+	public TreePage treeGetStartBtnClick() {
 		treeGetStartBtn.click();
+		return new TreePage(driver);
 	}
 	
-	public void graphGetStartBtnClick() {
+	public GraphPage graphGetStartBtnClick() {
 		graphGetStartBtn.click();
+		return new GraphPage(driver);
 	}
 	
 	

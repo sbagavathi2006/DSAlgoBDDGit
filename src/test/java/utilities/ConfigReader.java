@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class ConfigReader {
 	
-	private Properties prop;
+	private static Properties prop;
 	
 	
 	//this method is read the properties from config.properties file and return properties prop object
@@ -20,13 +20,15 @@ public class ConfigReader {
 		
 		}
 		catch (FileNotFoundException e) {  //here give try catch block otherwise it got error
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return prop;//return the prop,finally all properties avaliable theire
-		
-}
+		return prop;//return the prop,finally all properties avaliable theire	
+	}
+	
+    public static Properties getProp() {
+        return prop;
+    }
+
 }
