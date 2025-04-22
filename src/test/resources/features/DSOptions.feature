@@ -10,25 +10,24 @@ Background:
     Then User is redirected to "<pages>" page
     
     Examples:
-      | dropdownOptions	| pages       |
-      | Arrays       		| array       |
-      | Linked-List  		| linked-list |
-      | Stack   			  | stack      	|
-      | Queue      	 		| queue       |
-      | Tree      		  | tree        |
-      | Graph     	 		| graph       |
+      | dropdownOptions 	| pages       |
+      | arrays       			| array       |
+      | linked-list  			| linked-list |
+      | stack   			 	  | stack      	|
+      | queue      	 		  | queue       |
+      | tree      		    | tree        |
+      | graph     	 	  	| graph       |
 
-	@Run
-   Scenario Outline: User redirected to "<pages>" page from "<panelOptions>" panel
+   Scenario Outline: User redirected to "<pages>" page from "<panelOptions>" flex
     When User clicks on Getting Started button in "<panelOptions>" panel
     Then User is redirected to "<pages>" page
     
     Examples:
-      | panelOptions								| pages       								|
-      | Data-Structures-Introduction| data-structures-introduction|
-      | Array       								| array      								  |
-      | Linked-List  								| linked-list 								|
-      | Stack   			  						| stack      									|
-      | Queue      	 								| queue       								|
-      | Tree      		  						| tree        								|
-      | Graph     	 								| graph       								|
+      | panelOptions								  | pages       								|
+      | data-structures-introduction| data-structures-introduction|
+      | array       								| array      								  |
+      | linked-list  								| linked-list 								|
+      | stack   			  						| stack      									|
+      | queue      	 								| queue       								|
+      | tree      		  						| tree        								|
+      | graph     	 								| graph       								|

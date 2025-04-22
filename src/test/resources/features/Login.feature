@@ -1,22 +1,22 @@
-
+@Login
 Feature: Login
 Background:
 	Given User is in Login page after clicking signin in home page
 	
-	 Scenario Outline: User receives an alert while clicks on Login button with "<username>" and "<password>"
-    When User clicks Login button with "<username>" and "<password>"
-    Then User User gets an alert "<messages>" appears below Password textbox
+	 Scenario Outline: User Login with multiple invalid test data from excel
+    When User clicks Login button for row <rowNum>
+    Then User gets an alert or error message for row <rowNum>
 
-    Examples:
-      | username   | password   		| messages                      |
-      | asxcvb     |            		| Please fill out this field    |
-      |            | greenHorn@2024 | Please fill out this field    |
-      | 14dece     | greenHorn@2024 | Invalid username and password |
-      | asxcvb     | numpyninja     | Invalid username and password |
-      | 14dece     | numpyninja     | Invalid username and password |
+   Examples:
+      | rowNum |
+      | 1      |
+      | 2      |
+      | 3      |
+      | 4      |
+      | 5      |
 
 		Scenario: User redirected to Home page while click on Login button with valid credentials
-		When User clicks login button with valid User name "asxcvb" and valid password "greenHorn@2024"
+		When User clicks on login button with valid credentials
 		Then User redirected to Data Structure Home Page with message You are logged in
 		
 		Scenario: User able to see user id after successful login
