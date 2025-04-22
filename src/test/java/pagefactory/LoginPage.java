@@ -5,33 +5,49 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import utilities.CommonMethods;
+
 public class LoginPage {
 	private WebDriver driver;
 	
-	@FindBy(id = "id_username") WebElement userNameSignIn;
-	@FindBy(id = "id_password") WebElement pwdSignIn;
-	@FindBy(xpath = "//input[@value=\"Login\"]") WebElement loginBtnClick;
+	@FindBy(id = "id_username") 
+	private WebElement userNameSignIn;
+	@FindBy(id = "id_password") 
+	private WebElement pwdSignIn;
+	@FindBy(xpath = "//input[@value=\"Login\"]") 
+	private WebElement loginBtnClick;
+	@FindBy(xpath = "//div[contains(text(), 'Invalid Username and Password')]") 
+	private WebElement loginErrMsg;
 	
 	public LoginPage (WebDriver driver) {
 		this.driver = driver; // Reuses the driver created in Hooks
         PageFactory.initElements(driver, this); //initialize all the WebElements that are annotated with @FindBy
 	}
 	
-	public String getLoginPageTitle() {
-		return driver.getTitle();
-	}
+//	public String getLoginPageTitle() {
+//		return driver.getTitle();
+//	}
 	
-	public void enterUserName() {
+	public void enterUserName(String userName) {
+        CommonMethods.waitForElementToBeVisible(driver, userNameSignIn, 5);
 		userNameSignIn.clear();
-		userNameSignIn.sendKeys("asxcvb");
+		userNameSignIn.sendKeys(userName);
 	}
 	
-	public void enterPwd() {
+	public void enterPwd(String password) {
+        CommonMethods.waitForElementToBeVisible(driver, pwdSignIn, 5);
 		pwdSignIn.clear();
-		pwdSignIn.sendKeys("greenHorn@2024");
+		pwdSignIn.sendKeys(password);
 	}
 	
-	public void loginBtnClick() {
+	public DSOptionsPage loginBtnClick() {
+        CommonMethods.waitForElementToBeVisible(driver, loginBtnClick, 5);
 		loginBtnClick.click();
+		return new DSOptionsPage(driver);
+	}
+	
+	public String getErrMsg() {
+        CommonMethods.waitForElementToBeVisible(driver, loginErrMsg, 5);
+		return loginErrMsg.getText();
 	}
 }

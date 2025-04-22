@@ -10,9 +10,9 @@ public class DSAlgoPortalPage {
 	
 	private WebDriver driver; //instance variable
 	
-	@FindBy(className = "btn" ) WebElement getStartedBtn;
+	@FindBy(className = "btn" ) 
+	private WebElement getStartedBtn;
 	
-	//class constructor
 	public DSAlgoPortalPage(WebDriver driver) {
 		this.driver = driver; //driver is passed from hooks class which is assigned with page class driver 
         PageFactory.initElements(driver, this);
@@ -22,4 +22,8 @@ public class DSAlgoPortalPage {
 		getStartedBtn.click();
 	}
 
+	public HomePage doGetStart() {
+		getStartedBtn.click();
+		return new HomePage(driver); //Passing the driver to HomePage as part of redirection
+	}
 }

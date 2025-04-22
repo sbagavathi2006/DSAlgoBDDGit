@@ -38,21 +38,19 @@ public class Hooks {
 		DriverFactory.getDriver().get(urlname); // Navigate to the base URL
 	}
 	
-//	@After("@afterSignIn")
-//	public void loginBeforeAfterSignInScenarios() {
-//	    // Perform login here
-//	    driver = DriverFactory.getDriver();
-//
-//	    DSAlgoPortalPage portalPage = new DSAlgoPortalPage(driver);
-//	    HomePage homePage = new HomePage(driver);
-//	    LoginPage loginPage = new LoginPage(driver);
-//
-//	    portalPage.getStartedBtnClick();
-//	    homePage.signInLinkClick();
-//	    loginPage.enterUserName(); // You can also pass hardcoded or config-based credentials
-//	    loginPage.enterPwd();
-//	    loginPage.loginBtnClick();
-//	}
+	@Before("@afterSignIn")
+	public void loginBeforeAfterSignInScenarios() {
+	    driver = DriverFactory.getDriver();
+	    DSAlgoPortalPage portalPage = new DSAlgoPortalPage(driver);
+	    HomePage homePage = new HomePage(driver);
+	    LoginPage loginPage = new LoginPage(driver);
+
+	    portalPage.getStartedBtnClick();
+	    homePage.signInLinkClick();
+	    loginPage.enterUserName(prop.getProperty("username"));
+	    loginPage.enterPwd(prop.getProperty("password"));
+	    loginPage.loginBtnClick();
+	}
 	
 	@After(order=1) //execute before closing the browser
 	public void tearDown(Scenario scenario){ //Take a screenshot automatically if a scenario fails
