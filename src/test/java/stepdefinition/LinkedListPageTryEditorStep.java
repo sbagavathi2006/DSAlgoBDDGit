@@ -12,25 +12,25 @@ public class LinkedListPageTryEditorStep {
 	    
 	}
 	
-	@When("User click the Try here button")
-	public void user_click_the_try_here_button() {
-	   
-	}
-	
-	@Then("User can see view Try here button")
-	public void user_can_see_view_try_here_button() {
-	    
-	}
-	
-	@When("User click Try here button")
-	public void user_click_try_here_button() {
-	    
-	}
-	
-	@Then("User redirected to the tryEditor page")
-	public void user_redirected_to_the_try_editor_page() {
-	    
-	}
+//	@When("User click the Try here button")
+//	public void user_click_the_try_here_button() {
+//	   
+//	}
+//	
+//	@Then("User can see view Try here button")
+//	public void user_can_see_view_try_here_button() {
+//	    
+//	}
+//	
+//	@When("User click Try here button")
+//	public void user_click_try_here_button() {
+//	    
+//	}
+//	
+//	@Then("User redirected to the tryEditor page")
+//	public void user_redirected_to_the_try_editor_page() {
+//	    
+//	}
 	
 	@Given("User is on the try Editor page for {string}")
 	public void user_is_on_the_try_editor_page_for(String string) {
@@ -51,15 +51,15 @@ public class LinkedListPageTryEditorStep {
 	public void user_is_on_the_deletion_page() {
 	   
 	}
+//	
+//	@When("User clicks on Practice Questions link")
+//	public void user_clicks_on_practice_questions_link() {
+//	    
+//	}
 	
-	@When("User clicks on Practice Questions link")
-	public void user_clicks_on_practice_questions_link() {
-	    
-	}
-	
-	@Then("User is to redirected to practice page")
-	public void user_is_to_redirected_to_practice_page() {
-	   
-	}
+//	@Then("User is to redirected to practice page")
+//	public void user_is_to_redirected_to_practice_page() {
+//	   
+//	}
 
 }

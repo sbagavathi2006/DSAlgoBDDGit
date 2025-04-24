@@ -8,26 +8,29 @@ import org.openqa.selenium.support.PageFactory;
 
 import utilities.CommonMethods;
 
-public class ArrayPageTryEditorPage {
-	
+public class GraphPageTryEditorPage {
 	private WebDriver driver;
-	
-	@FindBy(linkText = "Try here>>>") 
-	private WebElement btnTryHere;	
 	@FindBy(css = ".CodeMirror.cm-s-default")
 	private WebElement codeMirror;
 	@FindBy(xpath ="//button")
-	private WebElement btnRun;	
+	private WebElement btnRun;
+	@FindBy(linkText = "Try here>>>") 
+	private WebElement btnTryHere;
 	@FindBy(id = "output")
 	private WebElement output;	
 	@FindBy (xpath = "//a[text()='Practice Questions']")
 	private WebElement practiceQnsLink;
 	
-	public ArrayPageTryEditorPage(WebDriver driver) {
+	public GraphPageTryEditorPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this); 
 	}
-
+	
+	public boolean isRunBtnDisplayed() {
+        CommonMethods.waitForElementToBeVisible(driver, btnRun, CommonMethods.DEFAULT_TIMEOUT);
+		return btnRun.isDisplayed();
+	}
+	
 	public boolean isTryHereBtnDisplayed() {
         CommonMethods.waitForElementToBeVisible(driver, btnTryHere, CommonMethods.DEFAULT_TIMEOUT);
 		return btnTryHere.isDisplayed();
@@ -38,10 +41,6 @@ public class ArrayPageTryEditorPage {
 		btnTryHere.click();
 	}
 	
-	public boolean isRunBtnDisplayed() {
-        CommonMethods.waitForElementToBeVisible(driver, btnRun, CommonMethods.DEFAULT_TIMEOUT);
-		return btnRun.isDisplayed();
-	}
 	public void clickRunTryHere() {
         CommonMethods.waitForElementToBeVisible(driver, btnRun, CommonMethods.DEFAULT_TIMEOUT);
 		btnRun.click();

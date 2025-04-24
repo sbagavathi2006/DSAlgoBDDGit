@@ -2,16 +2,12 @@ package stepdefinition;
 
 import static org.testng.Assert.assertTrue;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import utilities.CommonMethods;
 import utilities.ConfigReader;
 import utilities.ExcelReader;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -32,7 +28,7 @@ public class LoginStep {
 	private DSOptionsPage landPage;
 	Properties prop = new Properties();
 	
-	private String filePath = "src/test/resources/testdata/DSAlgoTestData.xlsx";
+	private String filePath;
 	private String sheetName = "DSAlgoLogin";
 	private String unKey;
 	private String pwdKey;
@@ -40,8 +36,9 @@ public class LoginStep {
 	
 
 	public LoginStep() {
-	    this.prop = ConfigReader.getProp();
-	}
+		 this.prop = new ConfigReader().init_prop(); // Ensures properties file is loaded
+		 this.filePath = prop.getProperty("excelTestdataPath");	
+		 }
 	
 	@Given("User is in Login page after clicking signin in home page")
 	public void user_is_in_login_page_after_clicking_signin_in_home_page() {
@@ -69,15 +66,19 @@ public class LoginStep {
 			pwdKey = rowData.get("password");
 			expectedMsg = rowData.get("messages"); 
 			
-			String actualMsg = "";	
+			boolean actualMsg = false;	
+			String errorMessage = "";
 			
-			if (unKey.isEmpty() || pwdKey.isEmpty()) {
-		        actualMsg = CommonMethods.getAlertText(driver, 3);
-		        assertTrue(actualMsg != null && actualMsg.equalsIgnoreCase(expectedMsg),
-		                "Expected alert message '" + expectedMsg + "' but got '" + actualMsg + "'");
-		    } else {
-		        actualMsg = loginPage.getErrMsg();
-		        assertTrue(actualMsg.equalsIgnoreCase(expectedMsg),
+			if (unKey.isEmpty()) {
+		        actualMsg = loginPage.getAlertForEmptyUsernameField();
+		        assertTrue(actualMsg, "The Username field is not marked as required!");
+		    } else if (pwdKey.isEmpty()){
+		        actualMsg = loginPage.getAlertForEmptyPasswordField();
+		        assertTrue(actualMsg, "The Password field is not marked as required!");
+		    	
+		    }else {
+		    	errorMessage = loginPage.getErrMsg();
+		        assertTrue(errorMessage.equalsIgnoreCase(expectedMsg),
 		                "Expected error message '" + expectedMsg + "' but got '" + actualMsg + "'");
 		    }
 	}

@@ -36,15 +36,15 @@ public class QueuePageTryEditorStep {
 	   
 	}
 
-	@When("User clicks on Run button {string}")
-	public void user_clicks_on_run_button(String string) {
-	 
-	}
+//	@When("User clicks on Run button {string}")
+//	public void user_clicks_on_run_button(String string) {
+//	 
+//	}
 
-	@Then("User should see {string}")
-	public void user_should_see(String string) {
-	
-	}
+//	@Then("User should see {string}")
+//	public void user_should_see(String string) {
+//	
+//	}
 	
 	@Given("User is on the Queue Operations of Queue page")
 	public void user_is_on_the_queue_operations_of_queue_page() {

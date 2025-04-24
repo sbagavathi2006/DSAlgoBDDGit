@@ -11,7 +11,7 @@ Background:
 
     Examples:
       | links                       | pages                          |
-      | Arrays in Python            | arrays in python               |
-      | Arrays Using List           | arrays using list              |
-      | Basic Operations in Lists   | basic operations in lists      |
-      | Applications of Array       | applications of array          |
+      | arrays in python            | arrays-in-python               |
+      | arrays using list           | arrays-using-list              |
+      | basic operations in lists   | basic-operations-in-lists      |
+      | applications of array       | applications-of-array          |
