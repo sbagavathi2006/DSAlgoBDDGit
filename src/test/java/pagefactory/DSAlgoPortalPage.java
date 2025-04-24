@@ -2,9 +2,10 @@ package pagefactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import utilities.CommonMethods;
 
 public class DSAlgoPortalPage {
 	
@@ -19,10 +20,12 @@ public class DSAlgoPortalPage {
 	}
 	
 	public void getStartedBtnClick() {
+        CommonMethods.waitForElementToBeVisible(driver, getStartedBtn, CommonMethods.DEFAULT_TIMEOUT);
 		getStartedBtn.click();
 	}
 
 	public HomePage doGetStart() {
+        CommonMethods.waitForElementToBeVisible(driver, getStartedBtn, CommonMethods.DEFAULT_TIMEOUT);
 		getStartedBtn.click();
 		return new HomePage(driver); //Passing the driver to HomePage as part of redirection
 	}

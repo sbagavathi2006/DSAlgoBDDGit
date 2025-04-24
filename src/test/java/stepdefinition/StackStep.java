@@ -16,8 +16,9 @@ public class StackStep {
 	   
 	}
 
-	@Then("User redirected to {string} page for Stack")
-	public void user_redirected_to_page_for_stack(String string) {
-	    
-	}
+//	@Then("User redirected to {string} page")
+//	public void user_redirected_to_page_for_stack(String string) {
+//	    
+//	}
+	
 }

@@ -15,8 +15,12 @@ import io.cucumber.testng.CucumberOptions;
 		features = {"src/test/resources/features/DSAlgoPortal.feature",
 				"src/test/resources/features/Home.feature",
 		        "src/test/resources/features/Login.feature",
-		        "src/test/resources/features/DSOptions.feature"}, // Path to the feature files
-//		features = {"src/test/resources/features/"}, // Path to the feature files
+		        "src/test/resources/features/DSOptions.feature",
+		        "src/test/resources/features/Array.feature",
+		        "src/test/resources/features/ArrayPageTryEditor.feature",
+		        "src/test/resources/features/Graph.feature",
+				"src/test/resources/features/GraphPageTryEditor.feature"}, // Path to the feature files
+//		features = {"src/test/resources/features/Login.feature"}, // Path to the feature files
 
 		glue={"stepdefinition","hooks"})// Packages containing step definitions and hooks
 

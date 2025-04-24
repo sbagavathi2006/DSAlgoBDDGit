@@ -37,7 +37,6 @@ public class HomeStep {
 
 	@When("User clicks {string} link")
 	public void user_clicks_link(String linkText) {
-//		homePage.clickLink(linkText);
 		homePage.clickHeaderLink(linkText);		
 	}
 

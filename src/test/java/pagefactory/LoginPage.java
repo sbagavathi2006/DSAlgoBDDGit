@@ -14,7 +14,7 @@ public class LoginPage {
 	private WebElement userNameSignIn;
 	@FindBy(id = "id_password") 
 	private WebElement pwdSignIn;
-	@FindBy(xpath = "//input[@value=\"Login\"]") 
+	@FindBy(xpath = "//input[@value='Login']") 
 	private WebElement loginBtnClick;
 	@FindBy(xpath = "//div[contains(text(), 'Invalid Username and Password')]") 
 	private WebElement loginErrMsg;
@@ -24,30 +24,34 @@ public class LoginPage {
         PageFactory.initElements(driver, this); //initialize all the WebElements that are annotated with @FindBy
 	}
 	
-//	public String getLoginPageTitle() {
-//		return driver.getTitle();
-//	}
-	
 	public void enterUserName(String userName) {
-        CommonMethods.waitForElementToBeVisible(driver, userNameSignIn, 5);
+        CommonMethods.waitForElementToBeVisible(driver, userNameSignIn, CommonMethods.DEFAULT_TIMEOUT);
 		userNameSignIn.clear();
 		userNameSignIn.sendKeys(userName);
 	}
 	
 	public void enterPwd(String password) {
-        CommonMethods.waitForElementToBeVisible(driver, pwdSignIn, 5);
+        CommonMethods.waitForElementToBeVisible(driver, pwdSignIn, CommonMethods.DEFAULT_TIMEOUT);
 		pwdSignIn.clear();
 		pwdSignIn.sendKeys(password);
 	}
 	
 	public DSOptionsPage loginBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, loginBtnClick, 5);
+        CommonMethods.waitForElementToBeVisible(driver, loginBtnClick, CommonMethods.DEFAULT_TIMEOUT);
 		loginBtnClick.click();
 		return new DSOptionsPage(driver);
 	}
 	
 	public String getErrMsg() {
-        CommonMethods.waitForElementToBeVisible(driver, loginErrMsg, 5);
+        CommonMethods.waitForElementToBeVisible(driver, loginErrMsg, CommonMethods.DEFAULT_TIMEOUT);
 		return loginErrMsg.getText();
+	}
+	
+	public boolean getAlertForEmptyUsernameField() {
+		return userNameSignIn.getDomAttribute("required") != null;
+	}
+	
+	public boolean getAlertForEmptyPasswordField() {
+		return pwdSignIn.getDomAttribute("required") != null;
 	}
 }

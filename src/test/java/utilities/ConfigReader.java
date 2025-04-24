@@ -27,8 +27,8 @@ public class ConfigReader {
 		return prop;//return the prop,finally all properties avaliable theire	
 	}
 	
-    public static Properties getProp() {
-        return prop;
-    }
+//    public static Properties getProp() {
+//        return prop;
+//    }
 
 }
