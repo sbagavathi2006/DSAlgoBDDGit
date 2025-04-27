@@ -30,14 +30,4 @@ public class CommonMethods {
         }
     }
     
-    public static void acceptAlert(WebDriver driver) {
-    	try {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT));
-        wait.until(ExpectedConditions.alertIsPresent());
-        driver.switchTo().alert().accept();
-    	} catch (Exception e) {
-            System.out.println("No alert found within timeout: "+ DEFAULT_TIMEOUT  + " seconds");
-        }
-    }
- 
 }
