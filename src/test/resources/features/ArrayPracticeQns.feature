@@ -1,6 +1,6 @@
 
 @afterSignIn
-Feature: ArrayPraticeQns
+Feature: ArrayPracticeQns
 Background:
 	Given User is on the arrays sublink page
 	
