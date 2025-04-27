@@ -36,6 +36,12 @@
     </build>
   
     <dependencies>
+	  <dependency>
+	  	<groupId>com.codoid.products</groupId>
+	  	<artifactId>fillo</artifactId>
+	  	<version>1.22</version>
+	</dependency>
+    
 <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 	<dependency>
 	    <groupId>org.seleniumhq.selenium</groupId>

@@ -1,21 +1,27 @@
 
 @afterSignIn
-Feature: ArrayPraticeQns
+Feature: ArrayPracticeQns
 Background:
-	Given User is on pratice page after clicks on Pratice Questions link from Applications of Array page
-     
+	Given User is on the arrays sublink page
+	
+	Scenario: User able to view pratice questions
+    When User clicks on pratice questions link
+    Then User able to view the questions
+
   Scenario Outline: User navigates to question pages correctly
+    Given User clicks on the pratice questions link
     When User clicks on "<linkText>" Link
     Then User is redirected to "<questionPage>" Page
 
     Examples:
-      | linkText                                | questionPage     |
-      | Search the array                        | question one     |
-      | Max Consecutive Ones                    | question two     |
-      | Find Numbers with Even Number of Digits | question three   |
-      | Squares of a Sorted Array               | question four    |
+      | linkText                                | questionPage |
+      | search the array                        | question/1   |
+      | max consecutive ones                    | question/2   |
+      | find numbers with even number of digits | question/3   |
+      | squares of  a sorted array              | question/4   |
 
   Scenario Outline: User is able to see Run button on each question page
+  	Given User clicks on pratice questions link
     When User clicks on "<linkText>" Link
     Then User is able to see Run button
 
@@ -24,9 +30,10 @@ Background:
       | Search the array                        |
       | Max Consecutive Ones                    |
       | Find Numbers with Even Number of Digits |
-      | Squares of a Sorted Array               |
+      | Squares of  a Sorted Array               |
 
   Scenario Outline: User is able to see Submit button on each question page
+    Given User clicks on pratice questions link
     When User clicks on "<linkText>" Link
     Then User is able to see Submit button
 
@@ -35,46 +42,45 @@ Background:
       | Search the array                        |
       | Max Consecutive Ones                    |
       | Find Numbers with Even Number of Digits |
-      | Squares of a Sorted Array               |   
+      | Squares of  a Sorted Array               |   
      
- 	Scenario Outline: User gets an message when clicks on Run button with "<codeValidations>" code snippet for "<questions>"
- 		Given User is on "<questions>" page after clicks on "<questions>" Link
-    When User click on run button with "<codeValidations>" code snippet
-    Then User gets an message "<message>"
+ 	Scenario Outline: User gets an message when clicks on Run button with "<codeValidationsType>" code snippet for "<questionsFea>"
+ 		Given User is on "<questionsFea>" page after clicks on arraysubpage Link
+    When User click on run button with "<codeValidationsType>" code snippet and "<questionsFea>" questions
+    Then User gets an message "<message>" for "<questionsFea>" questions for "<codeValidationsType>"
 
     Examples:
-      |  questions   														 |codeValidations   		| message                      		  |
-      |  Search the array         							 |ExistingCodeSnippet   | SyntaxError: bad input on lineTwo |
-      |  Search the array          							 |InvalidCodeSnippet    | SyntaxError: bad input   					|
-     	|  Search the array          							 |VaildCodeSnippet      | Output below Run button   				|
-      |  Max Consecutive Ones          					 |ExistingCodeSnippet   | SyntaxError: bad input on lineTwo |
-      |  Max Consecutive Ones         					 |InvalidCodeSnippet    | SyntaxError: bad input   					|
-     	|  Max Consecutive Ones         					 |VaildCodeSnippet      | Output below Run button   				|
-      |  Find Numbers with Even Number of Digits |ExistingCodeSnippet   | SyntaxError: bad input on lineTwo	|
-      |  Find Numbers with Even Number of Digits |InvalidCodeSnippet    | SyntaxError: bad input   					|
-     	|  Find Numbers with Even Number of Digits |VaildCodeSnippet      | Output below Run button   				|
-      |  Squares of a Sorted Array          		 |ExistingCodeSnippet   | SyntaxError: bad input on lineTwo	|
-      |  Squares of a Sorted Array           		 |InvalidCodeSnippet    | SyntaxError: bad input   					|
-     	|  Squares of a Sorted Array          		 |VaildCodeSnippet     	| Output below Run button   				|
-    
-  
-  Scenario Outline: User gets an  message "<Message>" when clicks on Submit button with "<codeValidations>" code snippet for "<questions>"
- 		Given User is on "<questions>" after clicks on "<questions>" Link
-    When User click on submit button with "<codeValidations>" code snippet
-    Then User gets "<message>" message
+      |  questionsFea														 |codeValidationsType		| message					|
+      |  search the array         							 |ExistingCodeSnippet   | SyntaxError			|
+      |  search the array          							 |InvalidCodeSnippet    | SyntaxError			|
+     	|  search the array          							 |VaildCodeSnippet      | OutputDisplayed	|
+      |  Max Consecutive Ones          					 |ExistingCodeSnippet   | SyntaxError			|
+      |  Max Consecutive Ones         					 |InvalidCodeSnippet    | SyntaxError			|
+     	|  Max Consecutive Ones         					 |VaildCodeSnippet      |	OutputDisplayed	|
+      |  Find Numbers with Even Number of Digits |ExistingCodeSnippet   | SyntaxError			|
+      |  Find Numbers with Even Number of Digits |InvalidCodeSnippet    | SyntaxError			|
+     	|  Find Numbers with Even Number of Digits |VaildCodeSnippet      | OutputDisplayed	|
+      |  Squares of  a Sorted Array          		 |ExistingCodeSnippet   | SyntaxError			|
+      |  Squares of  a Sorted Array           	 |InvalidCodeSnippet    | SyntaxError			|
+     	|  Squares of  a Sorted Array          		 |VaildCodeSnippet     	| OutputDisplayed	|
+ 
+  Scenario Outline: User gets an  message "<message>" when clicks on Submit button with "<codeValidationsType>" code snippet for "<questionsFea>"
+ 		Given User is on "<questionsFea>" page after clicks on arraysubpage Link
+    When User click on submit button with "<codeValidationsType>" code snippet and "<questionsFea>" questions
+    Then User gets message "<message>" for "<questionsFea>" questions for "<codeValidationsType>" submit
 
     Examples:
-      | questions   														 |codeValidations   		| message                      		  |
+      | questionsFea   													 |codeValidationsType   | message                      		  |
       |  Search the array         							 |ExistingCodeSnippet   | Error occurred during submission 	|
       |  Search the array          							 |InvalidCodeSnippet    | Error occurred during submission 	|
-     	|  Search the array          							 |VaildCodeSnippet      | Success    												|
+     	|  Search the array          							 |VaildCodeSnippet      | Submission Successful   					|
       |  Max Consecutive Ones          					 |ExistingCodeSnippet   | Error occurred during submission 	|
       |  Max Consecutive Ones         					 |InvalidCodeSnippet    | Error occurred during submission 	|
-     	|  Max Consecutive Ones         					 |VaildCodeSnippet      |	Success   												|
+     	|  Max Consecutive Ones         					 |VaildCodeSnippet      |	Submission Successful  						|
       |  Find Numbers with Even Number of Digits |ExistingCodeSnippet   | Error occurred during submission	|
       |  Find Numbers with Even Number of Digits |InvalidCodeSnippet    | Error occurred during submission  |
-     	|  Find Numbers with Even Number of Digits |VaildCodeSnippet      | Success									   				|
-      |  Squares of a Sorted Array          		 |ExistingCodeSnippet   | Error occurred during submission	|
-      |  Squares of a Sorted Array           		 |InvalidCodeSnippet    | Error occurred during submission  |
-     	|  Squares of a Sorted Array          		 |VaildCodeSnippet     	| Success									   				|
+     	|  Find Numbers with Even Number of Digits |VaildCodeSnippet      | Submission Successful		   				|
+      |  Squares of  a Sorted Array          		 |ExistingCodeSnippet   | Error occurred during submission	|
+      |  Squares of  a Sorted Array          		 |InvalidCodeSnippet    | Error occurred during submission  |
+     	|  Squares of  a Sorted Array          		 |VaildCodeSnippet     	| Submission Successful		  				|
     

@@ -1,5 +1,4 @@
 
-@Home
 Feature: Home
 Background:
 	Given User is in home Page after clicking get started button in DS Algo page

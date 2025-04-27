@@ -39,19 +39,16 @@ public class HomePage {
 	}
 	
 	public void clickNumpyNinja() {
-        CommonMethods.waitForElementToBeVisible(driver, numpyNinjaLink, CommonMethods.DEFAULT_TIMEOUT);
 	    numpyNinjaLink.click();
 	}
 
 	public void signInLinkClick() {
-        CommonMethods.waitForElementToBeVisible(driver, signInLink, CommonMethods.DEFAULT_TIMEOUT);
 		signInLink.click();
 	}
 	
 	public boolean isHomeHeaderLinksDisplayed(String headerlink) {
 		
 		for(WebElement e : homeHeaderLinks) {
-	        CommonMethods.waitForElementToBeVisible(driver, e, CommonMethods.DEFAULT_TIMEOUT);
 			if(e.getText().trim().equalsIgnoreCase(headerlink)) {
 				return e.isDisplayed();
 			}
@@ -61,7 +58,6 @@ public class HomePage {
 			
 	public void clickHeaderLink(String linkText) {
 		    for (WebElement link : homeHeaderLinks) {
-		        CommonMethods.waitForElementToBeVisible(driver, link, CommonMethods.DEFAULT_TIMEOUT);
 		        if (link.getText().trim().equalsIgnoreCase(linkText)) {
 		            link.click();
 		            return;
@@ -71,7 +67,6 @@ public class HomePage {
 		}
 
 	public void clickDataStructuresDropdown() {
-        CommonMethods.waitForElementToBeVisible(driver, dsDropdown, CommonMethods.DEFAULT_TIMEOUT);
 	    dsDropdown.click();
 	}
 	
@@ -80,7 +75,6 @@ public class HomePage {
 	    for (String expected : expectedOptions) {
 	        boolean found = false;
 	        for(WebElement option : dsDropdownOptions) {
-	            CommonMethods.waitForElementToBeVisible(driver, option, CommonMethods.DEFAULT_TIMEOUT);
 	        	String actualText = option.getText().trim();
 	        	if(actualText.equalsIgnoreCase(expected)) {
 	        		found = true;
@@ -94,7 +88,6 @@ public class HomePage {
 	
 	public void selectFromDropdown(String optionText) {
 	    for (WebElement e : dsDropdownOptions) {
-	        CommonMethods.waitForElementToBeVisible(driver, e, CommonMethods.DEFAULT_TIMEOUT);
 	        if (e.getText().trim().equalsIgnoreCase(optionText)) {
 	            e.click();
 	            return;
@@ -104,7 +97,6 @@ public class HomePage {
 	}
 	
 	public boolean getAlertText() {
-        CommonMethods.waitForElementToBeVisible(driver, msg, CommonMethods.DEFAULT_TIMEOUT);
 	    return msg.isDisplayed();
 	}
   
@@ -112,7 +104,6 @@ public class HomePage {
 	public void clickFlexGetStarted(String flexTitle) {
 	    String xpath = "//a[@href= '"+flexTitle+"']";
 	    WebElement getStartedBtn = driver.findElement(By.xpath(xpath));
-        CommonMethods.waitForElementToBeVisible(driver, getStartedBtn, CommonMethods.DEFAULT_TIMEOUT);
 	    getStartedBtn.click();
 	}
 

@@ -96,7 +96,7 @@ public class ArrayPageTryEditorStep {
 	public void user_should_see_for_row(int rowNum) {
 		Map<String, String> rowData = ExcelReader.getData(sheetName, rowNum, filePath);
 		expectedMsg = rowData.get("expectedResults");
-		String actualMsg = CommonMethods.getAlertText(driver, 3);
+		String actualMsg = CommonMethods.getAlertText(driver);
 		
 		if(actualMsg == null) {
 	        if (tryEditor.isOutputSuccess()) {  // No alert- should be successful output scenario

@@ -4,7 +4,6 @@ import static org.testng.Assert.assertTrue;
 
 import org.openqa.selenium.WebDriver;
 
-import utilities.CommonMethods;
 import utilities.ConfigReader;
 import utilities.ExcelReader;
 

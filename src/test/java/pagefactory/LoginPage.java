@@ -25,25 +25,21 @@ public class LoginPage {
 	}
 	
 	public void enterUserName(String userName) {
-        CommonMethods.waitForElementToBeVisible(driver, userNameSignIn, CommonMethods.DEFAULT_TIMEOUT);
 		userNameSignIn.clear();
 		userNameSignIn.sendKeys(userName);
 	}
 	
 	public void enterPwd(String password) {
-        CommonMethods.waitForElementToBeVisible(driver, pwdSignIn, CommonMethods.DEFAULT_TIMEOUT);
 		pwdSignIn.clear();
 		pwdSignIn.sendKeys(password);
 	}
 	
 	public DSOptionsPage loginBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, loginBtnClick, CommonMethods.DEFAULT_TIMEOUT);
 		loginBtnClick.click();
 		return new DSOptionsPage(driver);
 	}
 	
 	public String getErrMsg() {
-        CommonMethods.waitForElementToBeVisible(driver, loginErrMsg, CommonMethods.DEFAULT_TIMEOUT);
 		return loginErrMsg.getText();
 	}
 	

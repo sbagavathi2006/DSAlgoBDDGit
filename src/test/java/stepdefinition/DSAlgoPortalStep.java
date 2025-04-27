@@ -12,14 +12,14 @@ import pagefactory.HomePage;
 import webdriver.DriverFactory;
 
 public class DSAlgoPortalStep {
-	
-	private WebDriver driver;
+
+	private WebDriver driver = DriverFactory.getDriver();;
 	private DSAlgoPortalPage portalPage;
     private HomePage homePage;
+
 	
 	@Given("User is on the DS Algo Portal")
 	public void user_is_on_the_ds_algo_portal() {
-		driver = DriverFactory.getDriver();
 		portalPage = new DSAlgoPortalPage(driver); 
 	}
 

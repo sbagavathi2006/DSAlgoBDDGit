@@ -1,4 +1,4 @@
-@Login
+
 Feature: Login
 Background:
 	Given User is in Login page after clicking signin in home page
