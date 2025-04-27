@@ -2,6 +2,7 @@ package stepdefinition;
 
 import static org.testng.Assert.assertTrue;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -27,14 +28,14 @@ public class GraphPageTryEditorStep {
 	private GraphPageTryEditorPage tryEditor;
 	Properties prop = new Properties();
 	
-	private String filePath;
-	private String sheetName = "GraphTryEditor";
-	private String codeKey;
-	private String expectedMsg;
+	private static List<Map<String, String>> testData;
+	private static final String sheetName ="GraphTryEditor";
 	
 	public GraphPageTryEditorStep() {
 		this.prop = new ConfigReader().init_prop();
-        this.filePath = prop.getProperty("excelTestdataPath");
+        String filePath = prop.getProperty("excelTestdataPath");
+        ExcelReader reader = new ExcelReader(filePath);
+        testData = reader.getDataAll(sheetName);
 	}
 	
 	@Given("User is on {string} page after clicking its link in the Graph Page")
@@ -74,36 +75,63 @@ public class GraphPageTryEditorStep {
 		tryEditor.isRunBtnDisplayed();
 	}
 
-	@Given("User is on graph Try Editor page for row {int}")
-	public void user_is_on_graph_try_editor_page_for_row(Integer rowNum) {
-		Map<String, String> rowData = ExcelReader.getData(sheetName, rowNum, filePath);
-		String graphSubPageKey = rowData.get("graphSubPage");
-		tryEditor = graphPage.clickGraphPageLinks(graphSubPageKey);
+	@Given("User is on tryeditor page for {string}")
+	public void user_is_on_tryeditor_page_for(String graphSubPage) {
+		tryEditor = graphPage.clickGraphPageLinks(graphSubPage);
 		tryEditor.clickTryHereBtn();
 	}
 	
-	@When("User clicks on graph Run button for row {int} graph")
-	public void user_clicks_on_graph_run_button_for_row_graph(Integer rowNum) {
-		Map<String, String> rowData = ExcelReader.getData(sheetName, rowNum, filePath);
-		codeKey = rowData.get("code");
-		tryEditor.writeCode(codeKey);
+	@When("User click Run button for {string} graphSubPage with code {string}")
+	public void user_clicks_run_button_for_graph_sub_page_with_code(String graphSubPage, String codeValidationsType) {
+		String codeTestData = null;
+		
+		for(Map<String, String> row: testData) {
+			String pageTestData = row.get("graphSubPage");
+			String validationTestData = row.get("codeValidations");
+			
+			if(graphSubPage.equalsIgnoreCase(pageTestData)&&
+			   codeValidationsType.equalsIgnoreCase(validationTestData)) {
+				codeTestData = row.get("code");	
+				break;
+			}
+
+		}
+		
+		if(codeTestData != null) {
+		tryEditor.writeCode(codeTestData);
 		tryEditor.clickRunTryHere();
+		} else {
+			throw new RuntimeException ("Test data not found for:" + codeValidationsType);
+		}
 	}
 	
-	@Then("User should see results for graph for row {int} graph")
-	public void user_should_see_results_for_graph_for_row_graph(Integer rowNum) {
-		Map<String, String> rowData = ExcelReader.getData(sheetName, rowNum, filePath);
-		expectedMsg = rowData.get("expectedResults");
-		String actualMsg = CommonMethods.getAlertText(driver, 3);
+	@Then("User view message {string} for {string} graphSubPage with code {string}")
+	public void user_view_message_for_graph_sub_page_with_code(String message, String graphSubPage, String codeValidationsType) {
+		String expectedTestData = null;
+		
+		for(Map<String, String> row: testData) {
+			String pageTestData = row.get("graphSubPage");
+			String validationTestData = row.get("codeValidations");
+			
+			if(graphSubPage.equalsIgnoreCase(pageTestData)&&
+			   codeValidationsType.equalsIgnoreCase(validationTestData)) {
+				expectedTestData = row.get("expectedResults");	
+				break;
+			}
+		}
+		
+		String actualMsg = CommonMethods.getAlertText(driver);
 		
 		if(actualMsg == null) {
 	        if (tryEditor.isOutputSuccess()) {  // No alert- should be successful output scenario
-	            System.out.println("Success output shown as expected: " + expectedMsg);
-	        } else {  assertTrue(false, "Test failed: No alert appeared and no output was displayed. Expected: " + expectedMsg);}
-	    } else { // Alert exists, check for NameError or SyntaxError		
-            assertTrue(actualMsg.contains(expectedMsg),
-                "Expected alert message to contain '" + expectedMsg + "' but got '" + actualMsg + "'");
-        } 	     
+	            System.out.println("Success output shown as expected: " + expectedTestData);
+	        } else {  assertTrue(false, "Test failed: No alert appeared and no output was displayed. Expected: " + expectedTestData);}
+	    } else if (expectedTestData != null) {
+		    assertTrue(actualMsg.contains(expectedTestData),
+			        "Expected alert message to contain '" + expectedTestData + "' but got '" + actualMsg + "'");
+			} else {
+			    assertTrue(false, "Test failed: Alert message was received, but expected message was null.");
+			} 
 	}	
 	
 	@When("User clicks on graph Practice Questions link")

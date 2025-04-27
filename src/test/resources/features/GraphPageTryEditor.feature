@@ -33,26 +33,36 @@ Given User is on "<GraphPage>" page after clicking its link in the Graph Page
    		| graph                | 
    		| graph representations|
       
-  Scenario Outline: User verifies Run button visibility and behavior for "<graphSubPage>" page
-    Given User is on graph Try Editor page for row <rowNum>
-    When User clicks on graph Run button for row <rowNum> graph
-    Then User should see results for graph for row <rowNum> graph
+  Scenario Outline: User gets message when click on Runbtn with "<codeValidationsType>" code snippet for "<graphSubPage>"
+    Given User is on tryeditor page for "<graphSubPage>"
+    When User click Run button for "<graphSubPage>" graphSubPage with code "<codeValidationsType>"
+    Then User view message "<message>" for "<graphSubPage>" graphSubPage with code "<codeValidationsType>"
 
-    Examples:
-      |rowNum|             	
-      | 1    |
-      | 2    |
-      | 3    |
-      | 4    |
-      | 5    |
-      | 6    |
-      | 7    |
-      | 8    |
-
+   Examples:
+      |  graphSubPage						|codeValidationsType| message					|
+      |  graph         					|EmptyRun   				| Error						|
+      |  graph           			  |InvalidCodeRun     | Error						|
+     	|  graph           			  |InvalidCodeRun     | Error						|
+      |  graph          				|ValidCodeRun   		| OutputDisplayed	|
+      |  graph representations  |EmptyRun    				| Error						|
+     	|  graph representations  |InvalidCodeRun     |	Error						|
+     	|  graph representations  |InvalidCodeRun     | Error						|	
+     	|  graph representations  |ValidCodeRun      	|	OutputDisplayed	|
+     
   Scenario Outline: User lands on Practice page
     Given User is on the "<graphSubPage>" graph subpage
     When User clicks on graph Practice Questions link
     Then User is redirected to graph practice page
+    
+        Examples:
+      | graphSubPage         |
+   		| graph                | 
+   		| graph representations|
+   		
+  Scenario Outline: User able to view graph pratice questions
+    Given User is on the "<graphSubPage>" graph subpage
+    When User clicks on graph Practice Questions link
+    Then User able to view the questions
     
         Examples:
       | graphSubPage         |

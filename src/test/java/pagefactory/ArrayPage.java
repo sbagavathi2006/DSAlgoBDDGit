@@ -15,6 +15,8 @@ private WebDriver driver;
 
 	@FindBy(className = "list-group-item") 
 	private List<WebElement> arrayPageLinks;	
+	@FindBy(xpath = "//a[@href='arrays-in-python']") 
+	private WebElement arraysInPython;
 	
 	public ArrayPage (WebDriver driver) {
 		this.driver = driver; 
@@ -27,13 +29,15 @@ private WebDriver driver;
 	
 	public ArrayPageTryEditorPage clickArrayPageLinks(String linkText) {
 		for(WebElement e: arrayPageLinks) {
-	        CommonMethods.waitForElementToBeVisible(driver, e, CommonMethods.DEFAULT_TIMEOUT);
 			if(e.getText().trim().equalsIgnoreCase(linkText)) {
 				e.click();
 				return new ArrayPageTryEditorPage(driver); //Initialize tryEditor
 			}
 		}
 		throw new RuntimeException("Link not found: " + linkText);
-
 	}	
+	
+	public void clickArraysInPython() {
+		arraysInPython.click();
+	}
 }

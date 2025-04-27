@@ -26,7 +26,6 @@ public class GraphPage {
 	
 	public GraphPageTryEditorPage clickGraphPageLinks(String linkText) {
 		for(WebElement e: graphPageLinks) {
-	        CommonMethods.waitForElementToBeVisible(driver, e, CommonMethods.DEFAULT_TIMEOUT);
 			if(e.getText().trim().equalsIgnoreCase(linkText)) {
 				e.click();
 				return new GraphPageTryEditorPage(driver); //Initialize tryEditor

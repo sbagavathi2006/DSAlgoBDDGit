@@ -29,21 +29,17 @@ public class ArrayPageTryEditorPage {
 	}
 
 	public boolean isTryHereBtnDisplayed() {
-        CommonMethods.waitForElementToBeVisible(driver, btnTryHere, CommonMethods.DEFAULT_TIMEOUT);
 		return btnTryHere.isDisplayed();
 	}
 	
 	public void clickTryHereBtn() {
-        CommonMethods.waitForElementToBeVisible(driver, btnTryHere, CommonMethods.DEFAULT_TIMEOUT);
 		btnTryHere.click();
 	}
 	
 	public boolean isRunBtnDisplayed() {
-        CommonMethods.waitForElementToBeVisible(driver, btnRun, CommonMethods.DEFAULT_TIMEOUT);
 		return btnRun.isDisplayed();
 	}
 	public void clickRunTryHere() {
-        CommonMethods.waitForElementToBeVisible(driver, btnRun, CommonMethods.DEFAULT_TIMEOUT);
 		btnRun.click();
 	}
 	
@@ -56,12 +52,12 @@ public class ArrayPageTryEditorPage {
 	}
 	
 	public boolean isOutputSuccess() {
-        CommonMethods.waitForElementToBeVisible(driver, output, CommonMethods.DEFAULT_TIMEOUT);
 		return output.isDisplayed();
 	}
 	
-	public void clickPracticeQnsLink() {
-        CommonMethods.waitForElementToBeVisible(driver, practiceQnsLink, CommonMethods.DEFAULT_TIMEOUT);
+	public ArrayPraticeQnsPage clickPracticeQnsLink() {
 		practiceQnsLink.click();
+		return new ArrayPraticeQnsPage(driver);
 	}
+	
 }

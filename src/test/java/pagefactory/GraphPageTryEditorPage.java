@@ -27,22 +27,18 @@ public class GraphPageTryEditorPage {
 	}
 	
 	public boolean isRunBtnDisplayed() {
-        CommonMethods.waitForElementToBeVisible(driver, btnRun, CommonMethods.DEFAULT_TIMEOUT);
 		return btnRun.isDisplayed();
 	}
 	
 	public boolean isTryHereBtnDisplayed() {
-        CommonMethods.waitForElementToBeVisible(driver, btnTryHere, CommonMethods.DEFAULT_TIMEOUT);
 		return btnTryHere.isDisplayed();
 	}
 	
 	public void clickTryHereBtn() {
-        CommonMethods.waitForElementToBeVisible(driver, btnTryHere, CommonMethods.DEFAULT_TIMEOUT);
 		btnTryHere.click();
 	}
 	
 	public void clickRunTryHere() {
-        CommonMethods.waitForElementToBeVisible(driver, btnRun, CommonMethods.DEFAULT_TIMEOUT);
 		btnRun.click();
 	}
 	
@@ -55,12 +51,10 @@ public class GraphPageTryEditorPage {
 	}
 	
 	public boolean isOutputSuccess() {
-        CommonMethods.waitForElementToBeVisible(driver, output, CommonMethods.DEFAULT_TIMEOUT);
 		return output.isDisplayed();
 	}
 	
 	public void clickPracticeQnsLink() {
-        CommonMethods.waitForElementToBeVisible(driver, practiceQnsLink, CommonMethods.DEFAULT_TIMEOUT);
 		practiceQnsLink.click();
 	}
 }

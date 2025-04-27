@@ -55,50 +55,50 @@ private WebDriver driver;
 	}
 	
 	public boolean getLoginSuccessMsg() {
-        CommonMethods.waitForElementToBeVisible(driver, loginSuccessAlert, CommonMethods.DEFAULT_TIMEOUT);
+        CommonMethods.waitForElementToBeVisible(driver, loginSuccessAlert);
 		return loginSuccessAlert.isDisplayed();
 	}
 	
 	
 	public String loggedInUser() {	
-        CommonMethods.waitForElementToBeVisible(driver, loggedInUserName, CommonMethods.DEFAULT_TIMEOUT);
+        CommonMethods.waitForElementToBeVisible(driver, loggedInUserName);
 		return loggedInUserName.getText().trim();
 	}
 	
 	public boolean signoutLinkDisplayed() {
-        CommonMethods.waitForElementToBeVisible(driver, signout, CommonMethods.DEFAULT_TIMEOUT);
+        CommonMethods.waitForElementToBeVisible(driver, signout);
 		return signout.isDisplayed();
 	}
 	
 	public void selectDropdownOptions() {
-        CommonMethods.waitForElementToBeVisible(driver, dsDropdown, CommonMethods.DEFAULT_TIMEOUT);
+        CommonMethods.waitForElementToBeVisible(driver, dsDropdown);
 		dsDropdown.click();
 	}
 	
 	public void clickDropdownList(String panelName) {
 		switch (panelName.trim().toLowerCase()) {
 			case "arrays":
-		        CommonMethods.waitForElementToBeVisible(driver, ddArraysOpt, CommonMethods.DEFAULT_TIMEOUT);
+		        CommonMethods.waitForElementToBeVisible(driver, ddArraysOpt);
 				ddArraysOpt.click();
 				break;
 			case "linked-list":
-		        CommonMethods.waitForElementToBeVisible(driver, ddLinkedListOpt, CommonMethods.DEFAULT_TIMEOUT);
+		        CommonMethods.waitForElementToBeVisible(driver, ddLinkedListOpt);
 				ddLinkedListOpt.click();
 				break;
 			case "stack":
-		        CommonMethods.waitForElementToBeVisible(driver, ddStackOpt, CommonMethods.DEFAULT_TIMEOUT);
+		        CommonMethods.waitForElementToBeVisible(driver, ddStackOpt);
 				ddStackOpt.click();
 				break;
 			case "queue":
-		        CommonMethods.waitForElementToBeVisible(driver, ddQueueOpt, CommonMethods.DEFAULT_TIMEOUT);
+		        CommonMethods.waitForElementToBeVisible(driver, ddQueueOpt);
 				ddQueueOpt.click();
 				break;
 			case "tree":
-		        CommonMethods.waitForElementToBeVisible(driver, ddTreeOpt, CommonMethods.DEFAULT_TIMEOUT);
+		        CommonMethods.waitForElementToBeVisible(driver, ddTreeOpt);
 				ddTreeOpt.click();
 				break;
 			case "graph":
-		        CommonMethods.waitForElementToBeVisible(driver, ddGraphOpt, CommonMethods.DEFAULT_TIMEOUT);
+		        CommonMethods.waitForElementToBeVisible(driver, ddGraphOpt);
 				ddGraphOpt.click();
 				break;
 			default:
@@ -108,31 +108,31 @@ private WebDriver driver;
 	public void clickGettingStartedForPanel(String panelName) {
 			switch (panelName.trim().toLowerCase()) {
 				case "data-structures-introduction":
-			        CommonMethods.waitForElementToBeVisible(driver, dsIntroGetStartBtn, CommonMethods.DEFAULT_TIMEOUT);
+			        CommonMethods.waitForElementToBeVisible(driver, dsIntroGetStartBtn);
 					dsIntroGetStartBtn.click();
 					break;
 				case "array":
-			        CommonMethods.waitForElementToBeVisible(driver, arrayGetStartBtn, CommonMethods.DEFAULT_TIMEOUT);
+			        CommonMethods.waitForElementToBeVisible(driver, arrayGetStartBtn);
 					arrayGetStartBtn.click();
 					break;
 				case "linked-list":
-			        CommonMethods.waitForElementToBeVisible(driver, linkedListGetStartBtn, CommonMethods.DEFAULT_TIMEOUT);
+			        CommonMethods.waitForElementToBeVisible(driver, linkedListGetStartBtn);
 					linkedListGetStartBtn.click();
 					break;
 				case "stack":
-			        CommonMethods.waitForElementToBeVisible(driver, stackGetStartBtn, CommonMethods.DEFAULT_TIMEOUT);
+			        CommonMethods.waitForElementToBeVisible(driver, stackGetStartBtn);
 					stackGetStartBtn.click();
 					break;
 				case "queue":
-			        CommonMethods.waitForElementToBeVisible(driver, queueGetStartBtn, CommonMethods.DEFAULT_TIMEOUT);
+			        CommonMethods.waitForElementToBeVisible(driver, queueGetStartBtn);
 					queueGetStartBtn.click();
 					break;
 				case "tree":
-			        CommonMethods.waitForElementToBeVisible(driver, treeGetStartBtn, CommonMethods.DEFAULT_TIMEOUT);
+			        CommonMethods.waitForElementToBeVisible(driver, treeGetStartBtn);
 					treeGetStartBtn.click();
 					break;
 				case "graph":
-			        CommonMethods.waitForElementToBeVisible(driver, graphGetStartBtn, CommonMethods.DEFAULT_TIMEOUT);
+			        CommonMethods.waitForElementToBeVisible(driver, graphGetStartBtn);
 					graphGetStartBtn.click();
 					break;
 				default:
@@ -141,43 +141,43 @@ private WebDriver driver;
 		}
 	
 	public DataStructurePage dsIntroGetStartBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, dsIntroGetStartBtn, CommonMethods.DEFAULT_TIMEOUT);
+        CommonMethods.waitForElementToBeVisible(driver, dsIntroGetStartBtn);
 		dsIntroGetStartBtn.click();
 		return new DataStructurePage(driver);
 	}
 	
 	public ArrayPage arrayGetStartBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, arrayGetStartBtn, CommonMethods.DEFAULT_TIMEOUT);
+        CommonMethods.waitForElementToBeVisible(driver, arrayGetStartBtn);
 		arrayGetStartBtn.click();
 		return new ArrayPage(driver);
 	}
 	
 	public LinkedListPage linkedListGetStartBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, linkedListGetStartBtn, CommonMethods.DEFAULT_TIMEOUT);
+        CommonMethods.waitForElementToBeVisible(driver, linkedListGetStartBtn);
 		linkedListGetStartBtn.click();
 		return new LinkedListPage(driver);
 	}
 	
 	public StackPage stackGetStartBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, stackGetStartBtn, CommonMethods.DEFAULT_TIMEOUT);
+        CommonMethods.waitForElementToBeVisible(driver, stackGetStartBtn);
 		stackGetStartBtn.click();
 		return new StackPage(driver);
 	}
 	
 	public QueuePage queueGetStartBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, queueGetStartBtn, CommonMethods.DEFAULT_TIMEOUT);
+        CommonMethods.waitForElementToBeVisible(driver, queueGetStartBtn);
 		queueGetStartBtn.click();
 		return new QueuePage(driver);
 	}
 	
 	public TreePage treeGetStartBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, treeGetStartBtn, CommonMethods.DEFAULT_TIMEOUT);
+        CommonMethods.waitForElementToBeVisible(driver, treeGetStartBtn);
 		treeGetStartBtn.click();
 		return new TreePage(driver);
 	}
 	
 	public GraphPage graphGetStartBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, graphGetStartBtn, CommonMethods.DEFAULT_TIMEOUT);
+        CommonMethods.waitForElementToBeVisible(driver, graphGetStartBtn);
 		graphGetStartBtn.click();
 		return new GraphPage(driver);
 	}
