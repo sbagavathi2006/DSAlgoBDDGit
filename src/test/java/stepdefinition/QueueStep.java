@@ -20,12 +20,7 @@ public class QueueStep {
 	@Given("User is on Queue page after clicks on Get Started button on Queue flex")
 	public void user_is_on_queue_page_after_clicks_on_get_started_button_on_queue_flex() {
 		queuePage = landPage.queueGetStartBtnClick();
-		String queuePageTitle = queuePage.getQueuePageTitle();
-		if(queuePageTitle.equalsIgnoreCase("Queue")) {
-			System.out.println("User is on the queue page.");
-		} else System.out.println("User is not on the queue page.");
 	}
-	
 	
 	@When("User clicks on {string} link for Queue")
 	public void user_clicks_on_link_for_queue(String links) {

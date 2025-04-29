@@ -8,7 +8,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pagefactory.DSOptionsPage;
-import pagefactory.QueuePage;
 import pagefactory.StackPage;
 import webdriver.DriverFactory;
 
