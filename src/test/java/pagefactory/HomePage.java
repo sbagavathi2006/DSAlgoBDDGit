@@ -8,8 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import utilities.CommonMethods;
-
 public class HomePage {
 
 	private WebDriver driver;
@@ -27,11 +25,11 @@ public class HomePage {
 	@FindBy (xpath = "//div[@class='dropdown-menu show']//a")
 	private List<WebElement> dsDropdownOptions;
 	@FindBy (xpath = "//div[contains(text(),'You are not logged in')]")
-	private WebElement msg;
+	private WebElement errMsg;
 	
 	public HomePage (WebDriver driver) {
-		this.driver = driver; // Reuses the driver created in Hooks
-        PageFactory.initElements(driver, this); //initialize all the WebElements that are annotated with @FindBy
+		this.driver = driver; 	// Reuses the driver created in Hooks
+        PageFactory.initElements(driver, this); 	//initialize all the WebElements that are annotated with @FindBy
 	}
 	
 	public String getTitle() {
@@ -81,9 +79,9 @@ public class HomePage {
 	        		break;
 	        	}
 	        }
-	        if (!found) return false; // One of the expected options was not found
+	        if (!found) return false; 		// One of the expected options was not found
 	    }
-	    return true; // All expected options were found
+	    return true; 		// All expected options were found
 	}
 	
 	public void selectFromDropdown(String optionText) {
@@ -96,10 +94,13 @@ public class HomePage {
 	    throw new RuntimeException("Dropdown option not found: " + optionText);
 	}
 	
-	public boolean getAlertText() {
-	    return msg.isDisplayed();
+	public boolean isLoginErrMsgDisplayed() {
+	    return errMsg.isDisplayed();
 	}
   
+	public String getLoginErrMsg() {
+	    return errMsg.getText();
+	}
     
 	public void clickFlexGetStarted(String flexTitle) {
 	    String xpath = "//a[@href= '"+flexTitle+"']";

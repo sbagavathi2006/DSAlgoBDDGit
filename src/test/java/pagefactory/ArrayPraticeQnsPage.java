@@ -75,7 +75,8 @@ public class ArrayPraticeQnsPage {
 	public void writeCode(String code) {
         CommonMethods.waitForElementToBeVisible(driver, codeMirror);
 
-//		codeMirror.clear();
+        //	codeMirror.clear();
+        
 	    JavascriptExecutor js = (JavascriptExecutor) driver;
 	    
 		 //get HTML element document.querySelector('.CodeMirror') & reference to the actual CodeMirror editor instance. Stores code-mirror editor instance to editor variable.

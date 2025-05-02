@@ -38,8 +38,8 @@ public class GraphPageTryEditorStep {
         testData = reader.getDataAll(sheetName);
 	}
 	
-	@Given("User is on {string} page after clicking its link in the Graph Page")
-	public void user_is_on_page_after_clicking_its_link_in_the_graph_page(String string) {
+	@Given("User is on graph page after clicking its link in the Graph Page")
+	public void user_is_on_graph_page_after_clicking_its_link_in_the_graph_page() {
 		graphPage = landPage.graphGetStartBtnClick();
 	}
 
@@ -94,7 +94,6 @@ public class GraphPageTryEditorStep {
 				codeTestData = row.get("code");	
 				break;
 			}
-
 		}
 		
 		if(codeTestData != null) {
@@ -124,7 +123,7 @@ public class GraphPageTryEditorStep {
 		
 		if(actualMsg == null) {
 	        if (tryEditor.isOutputSuccess()) {  // No alert- should be successful output scenario
-	            System.out.println("Success output shown as expected: " + expectedTestData);
+	            assertTrue(tryEditor.isOutputSuccess(),"Success output shown as expected: " + expectedTestData);
 	        } else {  assertTrue(false, "Test failed: No alert appeared and no output was displayed. Expected: " + expectedTestData);}
 	    } else if (expectedTestData != null) {
 		    assertTrue(actualMsg.contains(expectedTestData),

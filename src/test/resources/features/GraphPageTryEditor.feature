@@ -2,9 +2,9 @@
 @afterSignIn
 Feature: GraphPageTryEditor
 Background: 
-Given User is on "<GraphPage>" page after clicking its link in the Graph Page
+Given User is on graph page after clicking its link in the Graph Page
 	
-  Scenario Outline: Verify User able to see Try here button for "<graphSubPage>"
+  Scenario Outline: Verify User able to see graph Try here button for "<graphSubPage>"
   	When  User click the "<graphSubPage>" graph link
     Then User can see graph Try here button 
     

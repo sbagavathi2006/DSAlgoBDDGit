@@ -2,6 +2,7 @@ package stepdefinition;
 
 import static org.testng.Assert.assertTrue;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -27,19 +28,18 @@ public class ArrayPageTryEditorStep {
 	private ArrayPageTryEditorPage tryEditor;
 	Properties prop = new Properties();
 	
-	private String filePath;
-	private String sheetName = "ArrayTryEditor";
-	private String codeKey;
-	private String expectedMsg;
-
-	
+	private static List<Map<String, String>> testData;
+	private static final String sheetName = "ArrayTryEditor";
+		
 	public ArrayPageTryEditorStep() {
 		this.prop = new ConfigReader().init_prop();
-        this.filePath = prop.getProperty("excelTestdataPath");
+        String filePath = prop.getProperty("excelTestdataPath");
+        ExcelReader reader = new ExcelReader(filePath);
+        testData = reader.getDataAll(sheetName);
 	}
 	
-	@Given("User is on {string} page after clicking its link in the Array Page")
-	public void user_is_on_page_after_clicking_its_link_in_the_array_page(String string) {
+	@Given("User is on array page after clicking its link in the Array Page")
+	public void user_is_on_array_page_after_clicking_its_link_in_the_array_page() {
 			arrayPage = landPage.arrayGetStartBtnClick();
 	}
 
@@ -76,37 +76,63 @@ public class ArrayPageTryEditorStep {
 	}
 
 	
-	@Given("User is on Try Editor page for row {int}")
-	public void user_is_on_try_editor_page_for(int rowNum){
-		Map<String, String> rowData = ExcelReader.getData(sheetName, rowNum, filePath);
-		String arraySubPageKey = rowData.get("arraySubPage");
-		tryEditor = arrayPage.clickArrayPageLinks(arraySubPageKey);
+	@Given("User is on array tryeditor page for {string}")
+	public void user_is_on_array_try_editor_page_for(String arraySubPage){
+		tryEditor = arrayPage.clickArrayPageLinks(arraySubPage);
 		tryEditor.clickTryHereBtn();
 	}
 
-	@When("User clicks on Run button for row {int}")
-	public void user_clicks_on_run_button_for_row(int rowNum) {
-		Map<String, String> rowData = ExcelReader.getData(sheetName, rowNum, filePath);
-		codeKey = rowData.get("code");
-		tryEditor.writeCode(codeKey);
+	@When("User click Run button for {string} arraySubPage with code {string}")
+	public void user_clicks_run_button_for_array_sub_page_with_code(String arraySubPage, String codeValidationsType) {
+		String codeTestData = null;
+		
+		for(Map<String, String> row: testData) {
+			String pageTestData = row.get("arraySubPage");
+			String validationTestData = row.get("codeValidations");
+			
+			if(arraySubPage.equalsIgnoreCase(pageTestData)&&
+			   codeValidationsType.equalsIgnoreCase(validationTestData)) {
+				codeTestData = row.get("code");	
+				break;
+			}
+		}
+		
+		if(codeTestData != null) {
+		tryEditor.writeCode(codeTestData);
 		tryEditor.clickRunTryHere();
+		} else {
+			throw new RuntimeException ("Test data not found for:" + codeValidationsType);
+		}
 	}
-
-	@Then("User should see for row {int}")
-	public void user_should_see_for_row(int rowNum) {
-		Map<String, String> rowData = ExcelReader.getData(sheetName, rowNum, filePath);
-		expectedMsg = rowData.get("expectedResults");
+	
+	@Then("User view message {string} for {string} arraySubPage with code {string}")
+	public void user_view_message_for_array_sub_page_with_code(String message, String arraySubPage, String codeValidationsType) {
+		String expectedTestData = null;
+		
+		for(Map<String, String> row: testData) {
+			String pageTestData = row.get("arraySubPage");
+			String validationTestData = row.get("codeValidations");
+			
+			if(arraySubPage.equalsIgnoreCase(pageTestData)&&
+			   codeValidationsType.equalsIgnoreCase(validationTestData)) {
+				expectedTestData = row.get("expectedResults");	
+				break;
+			}
+		}
+		
 		String actualMsg = CommonMethods.getAlertText(driver);
 		
 		if(actualMsg == null) {
-	        if (tryEditor.isOutputSuccess()) {  // No alert- should be successful output scenario
-	            System.out.println("Success output shown as expected: " + expectedMsg);
-	        } else {  assertTrue(false, "Test failed: No alert appeared and no output was displayed. Expected: " + expectedMsg);}
-	    } else { // Alert exists, check for NameError or SyntaxError		
-            assertTrue(actualMsg.contains(expectedMsg),
-                "Expected alert message to contain '" + expectedMsg + "' but got '" + actualMsg + "'");
-        } 	     
-	}
+	        if (tryEditor.isOutputSuccess()) {  	// No alert- should be successful output scenario
+	        	assertTrue(tryEditor.isOutputSuccess(), "Success output not shown as expected: " + expectedTestData);
+	        } else {  assertTrue(false, "Test failed: No alert appeared and no output was displayed. Expected: " + expectedTestData);}
+	    } else if (expectedTestData != null) { 		// Alert - invalid code scenarios
+		    assertTrue(actualMsg.contains(expectedTestData),
+			        "Expected alert message to contain '" + expectedTestData + "' but got '" + actualMsg + "'");
+			} else {  // Alert received but no expected msg
+			    assertTrue(false, "Test failed: Alert message was received, but expected message was null.");
+			} 
+	}	
 
 	@When("User clicks on Practice Questions link")
 	public void user_clicks_on_practice_questions_link() {
@@ -119,5 +145,4 @@ public class ArrayPageTryEditorStep {
 		String actualResult = driver.getTitle();
 		assertTrue(actualResult.contains(expectedResult), " User is not on the practice Page");
 	}
-
 }

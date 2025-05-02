@@ -6,8 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import utilities.CommonMethods;
-
 public class GraphPageTryEditorPage {
 	private WebDriver driver;
 	@FindBy(css = ".CodeMirror.cm-s-default")
@@ -43,11 +41,13 @@ public class GraphPageTryEditorPage {
 	}
 	
 	public void writeCode(String code) {
-		    JavascriptExecutor js = (JavascriptExecutor) driver;
-			 //get HTML element document.querySelector('.CodeMirror') & reference to the actual CodeMirror editor instance. Stores code-mirror editor instance to editor variable.
-			js.executeScript(
-				"let editor = document.querySelector('.CodeMirror').CodeMirror;" +
-				"editor.setValue(arguments[0]);", code);	//passing code as a parameter rather than hardcoding it inside the JS string.editor.setValue(code);	
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		    
+		//get HTML element document.querySelector('.CodeMirror') & reference to the actual CodeMirror editor instance. Stores code-mirror editor instance to editor variable.
+		
+		js.executeScript(
+			"let editor = document.querySelector('.CodeMirror').CodeMirror;" +
+			"editor.setValue(arguments[0]);", code);	//passing code as a parameter rather than hardcoding it inside the JS string.editor.setValue(code);	
 	}
 	
 	public boolean isOutputSuccess() {
@@ -56,5 +56,9 @@ public class GraphPageTryEditorPage {
 	
 	public void clickPracticeQnsLink() {
 		practiceQnsLink.click();
+	}
+	
+	public boolean isPracticeQnsDisplayed() {
+		return practiceQnsLink.isDisplayed();
 	}
 }
