@@ -172,7 +172,7 @@ private WebDriver driver;
 	
 	public TreePage treeGetStartBtnClick() {
         CommonMethods.waitForElementToBeVisible(driver, treeGetStartBtn);
-		treeGetStartBtn.click();
+        treeGetStartBtn.click();
 		return new TreePage(driver);
 	}
 	

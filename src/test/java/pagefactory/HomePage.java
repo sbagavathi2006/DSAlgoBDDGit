@@ -107,4 +107,9 @@ public class HomePage {
 	    getStartedBtn.click();
 	}
 
+	public void RegisterLinkClick() {
+          registerLink.click();
+		
+	}
+
 }

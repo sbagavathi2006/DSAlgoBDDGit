@@ -24,7 +24,7 @@ public class ExcelReader {
         this.filePath = filePath;
     }
 	
-	public static Map<String, String> getData(String sheetName, int rowNum, String filePath) {
+	public static Map<String, String> getData(String sheetName, int rowNum, String filePath){
 	    Map<String, String> data = new HashMap<>();
 
 	    try (FileInputStream fis = new FileInputStream(filePath);

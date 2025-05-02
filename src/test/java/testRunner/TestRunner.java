@@ -19,8 +19,11 @@ import io.cucumber.testng.CucumberOptions;
 //		        "src/test/resources/features/Array.feature",
 //		        "src/test/resources/features/ArrayPageTryEditor.feature",
 //		        "src/test/resources/features/Graph.feature",
-//				"src/test/resources/features/GraphPageTryEditor.feature"}, // Path to the feature files
-		features = {"src/test/resources/features/Tree.feature"}, // Path to the feature files
+//				"src/test/resources/features/GraphPageTryEditor.feature",
+//		        "src/test/resources/features/Tree.feature",
+//              "src/test/resources/features/TreePageTryEditor.feature",
+//         	"src/test/resources/feature/Logout.feature"}, // Path to the feature files
+		features = {"src/test/resources/features/Register.feature"}, // Path to the feature files
 
 		glue={"stepdefinition","hooks"})// Packages containing step definitions and hooks
 
