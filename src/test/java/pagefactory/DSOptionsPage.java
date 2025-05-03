@@ -1,5 +1,6 @@
 package pagefactory;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,8 +11,7 @@ import utilities.CommonMethods;
 public class DSOptionsPage {
 	
 private WebDriver driver;
-	@FindBy(css = "ul > a:nth-child(2)")
-	private WebElement loggedInUserName;	
+	
 	@FindBy(xpath = "//a[contains(text(), 'Sign out')]") 
 	private WebElement signout;	
 	@FindBy(xpath = "//div[contains(text(), 'You are logged in')]") 
@@ -46,27 +46,28 @@ private WebDriver driver;
 	private WebElement graphGetStartBtn;
 	
 	public DSOptionsPage (WebDriver driver) {
-		this.driver = driver; // Reuses the driver created in Hooks
-        PageFactory.initElements(driver, this); //initialize all the WebElements that are annotated with @FindBy
+		this.driver = driver; 		// Reuses the driver created in Hooks
+        PageFactory.initElements(driver, this); 		//initialize all the WebElements that are annotated with @FindBy
 	}
 	
 	public String getTitle() {
 		return driver.getTitle();
 	}
 	
-	public boolean getLoginSuccessMsg() {
-        CommonMethods.waitForElementToBeVisible(driver, loginSuccessAlert);
+	public boolean isLoginSuccessMsgDisplayed() {
 		return loginSuccessAlert.isDisplayed();
 	}
 	
+	public String getLoginSuccessMsg() {
+		return loginSuccessAlert.getText();
+	}
 	
-	public String loggedInUser() {	
-        CommonMethods.waitForElementToBeVisible(driver, loggedInUserName);
-		return loggedInUserName.getText().trim();
+	public String loggedInUser(String username) {
+	    WebElement loggedInUserName = driver.findElement(By.xpath("//a[contains(text(), '" + username + "')]")); 	//to handle dynamic user name
+	    return loggedInUserName.getText().trim().toLowerCase();
 	}
 	
 	public boolean signoutLinkDisplayed() {
-        CommonMethods.waitForElementToBeVisible(driver, signout);
 		return signout.isDisplayed();
 	}
 	
@@ -78,11 +79,9 @@ private WebDriver driver;
 	public void clickDropdownList(String panelName) {
 		switch (panelName.trim().toLowerCase()) {
 			case "arrays":
-		        CommonMethods.waitForElementToBeVisible(driver, ddArraysOpt);
 				ddArraysOpt.click();
 				break;
 			case "linked-list":
-		        CommonMethods.waitForElementToBeVisible(driver, ddLinkedListOpt);
 				ddLinkedListOpt.click();
 				break;
 			case "stack":
@@ -108,31 +107,24 @@ private WebDriver driver;
 	public void clickGettingStartedForPanel(String panelName) {
 			switch (panelName.trim().toLowerCase()) {
 				case "data-structures-introduction":
-			        CommonMethods.waitForElementToBeVisible(driver, dsIntroGetStartBtn);
 					dsIntroGetStartBtn.click();
 					break;
 				case "array":
-			        CommonMethods.waitForElementToBeVisible(driver, arrayGetStartBtn);
 					arrayGetStartBtn.click();
 					break;
 				case "linked-list":
-			        CommonMethods.waitForElementToBeVisible(driver, linkedListGetStartBtn);
 					linkedListGetStartBtn.click();
 					break;
 				case "stack":
-			        CommonMethods.waitForElementToBeVisible(driver, stackGetStartBtn);
 					stackGetStartBtn.click();
 					break;
 				case "queue":
-			        CommonMethods.waitForElementToBeVisible(driver, queueGetStartBtn);
 					queueGetStartBtn.click();
 					break;
 				case "tree":
-			        CommonMethods.waitForElementToBeVisible(driver, treeGetStartBtn);
 					treeGetStartBtn.click();
 					break;
 				case "graph":
-			        CommonMethods.waitForElementToBeVisible(driver, graphGetStartBtn);
 					graphGetStartBtn.click();
 					break;
 				default:
@@ -141,43 +133,36 @@ private WebDriver driver;
 		}
 	
 	public DataStructurePage dsIntroGetStartBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, dsIntroGetStartBtn);
 		dsIntroGetStartBtn.click();
 		return new DataStructurePage(driver);
 	}
 	
 	public ArrayPage arrayGetStartBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, arrayGetStartBtn);
 		arrayGetStartBtn.click();
 		return new ArrayPage(driver);
 	}
 	
 	public LinkedListPage linkedListGetStartBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, linkedListGetStartBtn);
 		linkedListGetStartBtn.click();
 		return new LinkedListPage(driver);
 	}
 	
 	public StackPage stackGetStartBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, stackGetStartBtn);
 		stackGetStartBtn.click();
 		return new StackPage(driver);
 	}
 	
 	public QueuePage queueGetStartBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, queueGetStartBtn);
 		queueGetStartBtn.click();
 		return new QueuePage(driver);
 	}
 	
 	public TreePage treeGetStartBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, treeGetStartBtn);
-        treeGetStartBtn.click();
+		treeGetStartBtn.click();
 		return new TreePage(driver);
 	}
 	
 	public GraphPage graphGetStartBtnClick() {
-        CommonMethods.waitForElementToBeVisible(driver, graphGetStartBtn);
 		graphGetStartBtn.click();
 		return new GraphPage(driver);
 	}

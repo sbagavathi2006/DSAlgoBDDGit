@@ -4,10 +4,8 @@ import static org.testng.Assert.assertTrue;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Properties;
 
-import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 
 import io.cucumber.java.en.Given;
@@ -105,8 +103,7 @@ public class ArrayPraticeQnsStep {
 	            validation.equalsIgnoreCase(codeValidationsType)) {
 	            codeSnippet = row.get("code");
 	            break;
-	        }
-	        
+	        }	        
 	    }
 
 	    if (codeSnippet != null) {
@@ -134,7 +131,7 @@ public class ArrayPraticeQnsStep {
 		String actualMsg = CommonMethods.getAlertText(driver);
 		if (actualMsg == null) {
 		    if (practicePage.isOutputSuccess()) {
-		        System.out.println("Success output shown as expected: " + expectedMsg);
+		        assertTrue(practicePage.isOutputSuccess(),"Success output shown as expected: " + expectedMsg);
 		    } else {
 		        assertTrue(false, "Test failed: No alert appeared and no output was displayed. Expected: " + expectedMsg);
 		    }
@@ -159,14 +156,11 @@ public class ArrayPraticeQnsStep {
 	            validation.equalsIgnoreCase(codeValidationsType)) {
 	            codeSnippet = row.get("code");
 	            break;
-	        }
-	        
+	        }	        
 	    }
 
 	    if (codeSnippet != null) {
 	        practicePage.writeCode(codeSnippet);
-//	        practicePage.clickRunBtn();
-//	        CommonMethods.acceptAlert(driver);
 	        practicePage.btnSubmit(); 
 	    } else {
 	        throw new RuntimeException("Test data not found for: " + codeValidationsType);
@@ -182,27 +176,11 @@ public class ArrayPraticeQnsStep {
 	        if (question.equalsIgnoreCase(questionsFea) &&
 	            validation.equalsIgnoreCase(codeValidationsType)) {
 	        	expectedMsg = row.get("errSubmit");
-	        	System.out.println("Expected message from Excel: " + expectedMsg);
-
 	            break;
 	        }
 	    }
 
 		String actualMsg = practicePage.getSubmitMsg();
-		System.out.println("Actual message from page: " + actualMsg);
 		assertTrue(actualMsg.equalsIgnoreCase(expectedMsg), "Expected: " + expectedMsg + ", but got: " + actualMsg);
-//	    try {
-//	        actualMsg = CommonMethods.getAlertText(driver); // Handle possible alert
-//	    } catch (UnhandledAlertException e) {
-//	        actualMsg = driver.switchTo().alert().getText(); // Fallback if alert already open
-//	        driver.switchTo().alert().accept(); // Accept the alert to continue
-//	    }
-//
-//	    if (actualMsg != null) {
-//	        assertTrue(actualMsg.contains(expectedMsg), "Expected alert to contain: " + expectedMsg + ", but got: " + actualMsg);
-//	    } else {
-//	        actualMsg = practicePage.getSubmitMsg();
-//	        assertTrue(actualMsg.equalsIgnoreCase(expectedMsg), "Expected: " + expectedMsg + ", but got: " + actualMsg);
-//	    }
 	}
 }

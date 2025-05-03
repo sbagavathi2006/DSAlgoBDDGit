@@ -12,6 +12,7 @@ public class CommonMethods {
     public static final int DEFAULT_TIMEOUT = 5;
 
 	  // Wait for element visibility to avoid StaleElementReferenceException explicit wait
+    
     public static void waitForElementToBeVisible(WebDriver driver, WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT));
         wait.until(ExpectedConditions.visibilityOf(element));
@@ -28,6 +29,5 @@ public class CommonMethods {
             System.out.println("No alert found within timeout: "+ DEFAULT_TIMEOUT  + " seconds");
             return null;
         }
-    }
-    
+    }    
 }

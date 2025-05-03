@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import utilities.CommonMethods;
-
 public class ArrayPage {
 	
 private WebDriver driver;
@@ -31,7 +29,7 @@ private WebDriver driver;
 		for(WebElement e: arrayPageLinks) {
 			if(e.getText().trim().equalsIgnoreCase(linkText)) {
 				e.click();
-				return new ArrayPageTryEditorPage(driver); //Initialize tryEditor
+				return new ArrayPageTryEditorPage(driver); 		//Initialize tryEditor
 			}
 		}
 		throw new RuntimeException("Link not found: " + linkText);

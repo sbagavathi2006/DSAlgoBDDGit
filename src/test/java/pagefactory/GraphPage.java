@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import utilities.CommonMethods;
-
 public class GraphPage {
 	private WebDriver driver;
 	
@@ -28,7 +26,7 @@ public class GraphPage {
 		for(WebElement e: graphPageLinks) {
 			if(e.getText().trim().equalsIgnoreCase(linkText)) {
 				e.click();
-				return new GraphPageTryEditorPage(driver); //Initialize tryEditor
+				return new GraphPageTryEditorPage(driver); 		//Initialize tryEditor
 			}
 		}
 		throw new RuntimeException("Link not found: " + linkText);
