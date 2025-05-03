@@ -79,9 +79,11 @@ private WebDriver driver;
 	public void clickDropdownList(String panelName) {
 		switch (panelName.trim().toLowerCase()) {
 			case "arrays":
+		        CommonMethods.waitForElementToBeVisible(driver, ddStackOpt);
 				ddArraysOpt.click();
 				break;
 			case "linked-list":
+		        CommonMethods.waitForElementToBeVisible(driver, ddStackOpt);
 				ddLinkedListOpt.click();
 				break;
 			case "stack":
