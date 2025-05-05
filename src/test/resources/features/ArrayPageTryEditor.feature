@@ -2,9 +2,9 @@
 @afterSignIn
 Feature: ArrayPageTryEditor
 Background: 
-Given User is on "<ArrayPage>" page after clicking its link in the Array Page
+Given User is on array page after clicking its link in the Array Page
 	
-  Scenario Outline: Verify User able to see Try here button for "<arraySubPages>"
+  Scenario Outline: Verify User able to see array Try here button for "<arraySubPages>"
   	When  User click the "<arraySubPages>" link
     Then User can see view Try here button 
     
@@ -38,31 +38,31 @@ Given User is on "<ArrayPage>" page after clicking its link in the Array Page
       | arrays using list           |
       | basic operations in lists   |
       | applications of array       |
-      
-  Scenario Outline: User verifies Run button visibility and behavior for "<arraySubPages>" page
-    Given User is on Try Editor page for row <rowNum>
-    When User clicks on Run button for row <rowNum>
-    Then User should see for row <rowNum>
 
-    Examples:
-      |rowNum|             	
-      | 1    |
-      | 2    |
-      | 3    |
-      | 4    |
-      | 5    |
-      | 6    |
-      | 7    |
-      | 8    |
-      | 9    |
-      | 10   |
-      | 11   |
-      | 12   |
-      | 13   |
-      | 14   |
-      | 15   |
-      | 16   |
+	Scenario Outline: User gets message when click on Runbtn with "<codeValidationsType>" code snippet for "<arraySubPage>"
+    Given User is on array tryeditor page for "<arraySubPage>"
+    When User click Run button for "<arraySubPage>" arraySubPage with code "<codeValidationsType>"
+    Then User view message "<message>" for "<arraySubPage>" arraySubPage with code "<codeValidationsType>"
 
+   Examples:
+      |  arraySubPage							|codeValidationsType| message					|
+      |  Arrays in python       	|EmptyRun   				| Error						|
+      |  Arrays in python       	|InvalidCodeRun     | Error						|
+     	|  Arrays in python       	|InvalidCodeRun     | Error						|
+      |  Arrays in python       	|ValidCodeRun   		| OutputDisplayed	|
+      |  Arrays Using List       	|EmptyRun   				| Error						|
+      |  Arrays Using List       	|InvalidCodeRun     | Error						|
+     	|  Arrays Using List       	|InvalidCodeRun     | Error						|
+      |  Arrays Using List       	|ValidCodeRun   		| OutputDisplayed	|
+      |  Basic Operations In Lists|EmptyRun   				| Error						|
+      |  Basic Operations In Lists|InvalidCodeRun     | Error						|
+     	|  Basic Operations In Lists|InvalidCodeRun     | Error						|
+      |  Basic Operations In Lists|ValidCodeRun   		| OutputDisplayed	|
+      |  Applications Of Array    |EmptyRun   				| Error						|
+      |  Applications Of Array    |InvalidCodeRun     | Error						|
+     	|  Applications Of Array    |InvalidCodeRun     | Error						|
+      |  Applications Of Array    |ValidCodeRun   		| OutputDisplayed	|
+   
   Scenario Outline: User lands on Practice page
     Given User is on the "<arraySubPages>" arraysubpage
     When User clicks on Practice Questions link

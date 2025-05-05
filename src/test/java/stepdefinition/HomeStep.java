@@ -16,8 +16,8 @@ import webdriver.DriverFactory;
 
 public class HomeStep {
 	
-	private WebDriver driver = DriverFactory.getDriver(); //get the driver from DriverFactory;
-	private DSAlgoPortalPage portalPage = new DSAlgoPortalPage(driver); //initialize the page object;
+	private WebDriver driver = DriverFactory.getDriver(); 		//get the driver from DriverFactory;
+	private DSAlgoPortalPage portalPage = new DSAlgoPortalPage(driver); 		//initialize the page object;
 	private HomePage homePage;
 	
 	@Given("User is in home Page after clicking get started button in DS Algo page")
@@ -66,12 +66,11 @@ public class HomeStep {
 
 	@Then("User views an alert {string}")
 	public void user_views_an_alert_for_the_dropdown(String expectedMsg) {
-	    assertTrue(homePage.getAlertText(),"error message is not displayed");
+	    assertTrue(homePage.isLoginErrMsgDisplayed(),"error message is not displayed");
 	}
 
 	@When("User clicks Get Started button on {string} flex")
 	public void user_clicks_get_started_button_on_flex(String name) {
 	  homePage.clickFlexGetStarted(name);
 	}
-
 }

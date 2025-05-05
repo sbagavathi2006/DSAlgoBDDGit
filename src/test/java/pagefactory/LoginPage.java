@@ -1,11 +1,10 @@
 package pagefactory;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import utilities.CommonMethods;
 
 public class LoginPage {
 	private WebDriver driver;
@@ -20,8 +19,8 @@ public class LoginPage {
 	private WebElement loginErrMsg;
 	
 	public LoginPage (WebDriver driver) {
-		this.driver = driver; // Reuses the driver created in Hooks
-        PageFactory.initElements(driver, this); //initialize all the WebElements that are annotated with @FindBy
+		this.driver = driver; 	// Reuses the driver created in Hooks
+        PageFactory.initElements(driver, this); 	//initialize all the WebElements that are annotated with @FindBy
 	}
 	
 	public void enterUserName(String userName) {
@@ -39,15 +38,33 @@ public class LoginPage {
 		return new DSOptionsPage(driver);
 	}
 	
+	public boolean isErrMsgDisplayed() {
+		return loginErrMsg.isDisplayed();
+	}
+	
 	public String getErrMsg() {
 		return loginErrMsg.getText();
 	}
 	
-	public boolean getAlertForEmptyUsernameField() {
+	public boolean isAlertForEmptyUsernameDisplayed() {
 		return userNameSignIn.getDomAttribute("required") != null;
 	}
 	
-	public boolean getAlertForEmptyPasswordField() {
+	public String getEmptyUserNameAlertMsg() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String validationMsg = (String) js.executeScript(
+	    "return arguments[0].validationMessage;", userNameSignIn);
+		return 	validationMsg;
+	}
+	
+	public boolean isAlertForEmptyPasswordDisplayed() {
 		return pwdSignIn.getDomAttribute("required") != null;
+	}
+	
+	public String getEmptyPasswordAlertMsg() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String validationMsg = (String) js.executeScript(
+	    "return arguments[0].validationMessage;", pwdSignIn);
+		return 	validationMsg;
 	}
 }

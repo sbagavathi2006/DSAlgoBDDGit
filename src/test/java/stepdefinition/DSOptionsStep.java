@@ -12,7 +12,7 @@ import webdriver.DriverFactory;
 
 public class DSOptionsStep {
 	
-	private WebDriver driver = DriverFactory.getDriver(); //get the driver from DriverFactory;
+	private WebDriver driver = DriverFactory.getDriver(); 		//get the driver from DriverFactory;
 	private DSOptionsPage landPage = new DSOptionsPage(driver);
 	
 	@Given("User is on the home page")	

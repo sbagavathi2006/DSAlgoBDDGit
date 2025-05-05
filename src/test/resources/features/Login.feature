@@ -3,26 +3,30 @@ Feature: Login
 Background:
 	Given User is in Login page after clicking signin in home page
 	
-	 Scenario Outline: User Login with multiple invalid test data from excel
-    When User clicks Login button for row <rowNum>
-    Then User gets an alert or error message for row <rowNum>
+	 Scenario Outline: User get message when login with different combination of credentials based on "<validation>"
+    When User clicks Login button with username and password for validation "<validation>"
+    Then User gets corresponding messages for validation "<validation>" 
 
-   Examples:
-      | rowNum |
-      | 1      |
-      | 2      |
-      | 3      |
-      | 4      |
-      | 5      |
-
-		Scenario: User redirected to Home page while click on Login button with valid credentials
-		When User clicks on login button with valid credentials
-		Then User redirected to Data Structure Home Page with message You are logged in
+		Examples:
+      |  validation				|
+      |  ValidCredential  |      
+      |  WrongUserName    |
+      |  WrongPwd         |
+      |  EmptyPwd  				|
+      |  EmptyUserName    |
 		
-		Scenario: User able to see user id after successful login
-		When User clicks on login button with valid credentials
-		Then User can see the logged in user name
+	Scenario Outline: User able to see user id after successful login
+		When User clicks on login button with valid credentials "<validation>"
+		Then User can see the logged in user name for valid credentials "<validation>"
 		
-		Scenario: User able to see sign out link after successful login
-		When User clicks on login button with valid credentials
+		Examples:
+      |  validation				|
+      |  ValidCredential  |  
+		
+	Scenario Outline: User able to see sign out link after successful login
+		When User clicks on login button with valid credentials "<validation>"
 		Then User can see Sign out link
+		
+		Examples:
+      |  validation				|
+      |  ValidCredential  |  

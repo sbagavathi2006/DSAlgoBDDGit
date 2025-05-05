@@ -12,11 +12,11 @@ public class ConfigReader {
 	
 	//this method is read the properties from config.properties file and return properties prop object
 	
-	public Properties init_prop() {//initialize the properties
-		prop = new Properties();//object of properties class
+	public Properties init_prop() {  //initialize the properties
+		prop = new Properties();		//object of properties class
 		try {
-			FileInputStream ip = new FileInputStream("src/test/resources/config/config.properties");//configuration file path
-			prop.load(ip);//load the properties and file input stream(ip) pass here and prop is object
+			FileInputStream ip = new FileInputStream("src/test/resources/config/config.properties");		//configuration file path
+			prop.load(ip);		//load the properties and file input stream(ip) pass here and prop is object
 		
 		}
 		catch (FileNotFoundException e) {  //here give try catch block otherwise it got error
@@ -24,11 +24,7 @@ public class ConfigReader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return prop;//return the prop,finally all properties avaliable theire	
+		return prop;		//return the prop,finally all properties avaliable theire	
 	}
-	
-//    public static Properties getProp() {
-//        return prop;
-//    }
 
 }
