@@ -165,7 +165,7 @@ public class RegisterPage {
 	public String getEmptyUsernameAlertMsg() {
 	    JavascriptExecutor js = (JavascriptExecutor) driver;
 	    String validationMsg = (String) js.executeScript(
-	     "return arguments[0].validationMessage;", Password_field);
+	     "return arguments[0].validationMessage;", Username_field);
 	       return validationMsg;
 		      }
 	
