@@ -26,12 +26,5 @@ public class TreeStep {
 		treePage.clickTreeSubLinks(links);
 	    
 	}
-//	
-//	@Then("User redirected to {string} pages")
-//	public void user_redirected_to_page(String string) {
-//		
-//	   
-//	}
-	
 	
 		   }
