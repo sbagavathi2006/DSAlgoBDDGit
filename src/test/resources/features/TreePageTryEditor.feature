@@ -3,7 +3,7 @@
 Feature: TreePageTryEditor 
 
 Background: 
-   Given User is on "<TreePage>" page after clicking its link in the Tree Page
+   Given User is on TreePage after clicking its link in the Tree Page
    
    Scenario Outline: Verify user able to see Try here button for "<treeSubPage>"
    When user click the "<treeSubPage>" tree link
@@ -148,7 +148,7 @@ Background:
   Scenario Outline: user able to view tree Practice Questions 
     Given User is on the "<treeSubPage>" tree subpage
     When User clicks on tree Practice Questions link
-    Then the user able to view the tree questions
+    Then the user able to view the tree questions page
     Examples:
    |  treeSubPage                       |
    |overview of trees                   |

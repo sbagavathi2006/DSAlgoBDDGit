@@ -1,5 +1,5 @@
 package hooks;
-
+import java.io.ByteArrayInputStream;
 import java.util.Properties;
 
 import org.openqa.selenium.OutputType;
@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.qameta.allure.Allure;
 import pagefactory.DSAlgoPortalPage;
 import pagefactory.HomePage;
 import pagefactory.LoginPage;
@@ -58,6 +59,7 @@ public class Hooks {
 			String screenshotName = scenario.getName().replaceAll("", "_");
 			byte [] sourcePath=((TakesScreenshot)DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES); 
 			scenario.attach(sourcePath, "image/png", screenshotName);
+			Allure.addAttachment("failedScreenshot", new ByteArrayInputStream(sourcePath));
 		}
 	}
 	
