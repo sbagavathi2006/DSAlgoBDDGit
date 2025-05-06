@@ -1,8 +1,7 @@
 package hooks;
-
+import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.Map;
-import java.io.ByteArrayInputStream;
 import java.util.Properties;
 
 import org.openqa.selenium.OutputType;
