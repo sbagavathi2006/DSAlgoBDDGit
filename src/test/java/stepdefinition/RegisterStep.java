@@ -100,15 +100,9 @@ public class RegisterStep {
         		break;
                     }  
 	             }
-              String currentUrl = driver.getCurrentUrl();
-             //if (currentUrl.contains("home")) {
-            	//register success
-            	  //String successMessage = registerPage.getSuccessMessage();
-            	  //assertTrue(successMessage.equalsIgnoreCase(messageTestData),
-            	  //"Expected success message '" + messageTestData + "' but got '" + successMessage + "'");
-               if(usernameTestData.isEmpty()) {
-            	  
-            		//empty user
+               String currentUrl = driver.getCurrentUrl();
+              if(usernameTestData.isEmpty()) {
+            	     //empty user
                   String alertMessage = registerPage.getEmptyUsernameAlertMsg();
                	  assertTrue(alertMessage.contains(messageTestData), "Expected success message'" + messageTestData + "' but got '" + alertMessage + "'");	
                }else if(passwordTestData.isEmpty()) {
@@ -121,13 +115,13 @@ public class RegisterStep {
             		//empty confirm password
             	  String alertMessage = registerPage.getEmptyConfirmPasswordAlertMsg();
                   assertTrue(alertMessage.contains(messageTestData), "Expected success message'" + messageTestData + "' but got '" + alertMessage + "'");		
-                }else if(currentUrl.contains("register")) {
+               }else if(currentUrl.contains("register")) {
         	  
         	         //register failed due to the mismatch password error
         	       String errorMessage = registerPage.getMismatchPasswordError();
          	       assertTrue(errorMessage.equalsIgnoreCase(messageTestData),
          	       "Expected error message '" + messageTestData + "' but got '" + errorMessage + "'");
-                }else if(currentUrl.contains("register")){
+               }else if(currentUrl.contains("register")){
         	  
                     //register shortpassword error
                   String errorMessage = registerPage.getMismatchPasswordError();
@@ -153,7 +147,7 @@ public class RegisterStep {
 	            String password = data.get("password");
 	            String confirmpassword = data.get("confirmpassword");
 
-	            //  Handle dynamic username generation
+	             // Handle dynamic username generation
 	            if (validation.equalsIgnoreCase("ValidCredential")) {
 	                username = username + System.currentTimeMillis();  // Makes username unique
 	                
