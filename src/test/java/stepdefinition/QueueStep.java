@@ -16,22 +16,24 @@ public class QueueStep {
 	private DSOptionsPage landPage = new DSOptionsPage(driver);
 	private QueuePage queuePage;
 	
-	
 	@Given("User is on Queue page after clicks on Get Started button on Queue flex")
 	public void user_is_on_queue_page_after_clicks_on_get_started_button_on_queue_flex() {
 		queuePage = landPage.queueGetStartBtnClick();
 	}
-	
-	@When("User clicks on {string} link for Queue")
-	public void user_clicks_on_link_for_queue(String links) {
+	  	
+	@When("User clicks on {string} link of Queue")
+	public void user_clicks_on_link_of_queue(String links) {
 		queuePage.clickQueuePageLinks(links);
 	}
-
-	@Then("User redirected to {string} page for Queue")
-	public void user_redirected_to_page_for_queue(String pages) {
+	    
+	
+	@Then("User redirected to {string} page of Queue")
+	public void user_redirected_to_page_of_queue(String pages) {
 		String expectedResult = pages;
 		String actualResult = driver.getCurrentUrl();
 		assertTrue(actualResult.contains(expectedResult),"User is not redirected to the "+pages+" page.");
+		  //System.out.println("STEP HIT: " + pages);
 	}
+	    
 	}
 

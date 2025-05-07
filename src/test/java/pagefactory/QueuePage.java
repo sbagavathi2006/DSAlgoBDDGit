@@ -8,7 +8,7 @@ public class QueuePage {
 	
 private WebDriver driver;
 	@FindBy(xpath = "//a[@href='implementation-lists']")
-	private WebElement ImplementationofQueueinPythonLink;
+    private WebElement ImplementationofQueueinPythonLink;
 	@FindBy(xpath = "//a[@href='queue/implementation-collections']")
 	private WebElement ImplementationUsingCollectionsLink;
 	@FindBy(xpath = "//a[@href='queue/Implementation-array']")
@@ -27,11 +27,11 @@ private WebDriver driver;
 		return driver.getTitle();
 	}
 	
-	public void clickQueuePageLinks(String linkText) {
+	public QueuePageTryEditorPage clickQueuePageLinks(String linkText) {
 		for(WebElement e: QueuePageLinks) {
 			if(e.getText().trim().equalsIgnoreCase(linkText)) {
 				e.click();
-				return;
+				return new QueuePageTryEditorPage(driver);
 			}
 		}
 		throw new RuntimeException("Link not found: " + linkText);

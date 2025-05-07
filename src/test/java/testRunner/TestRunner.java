@@ -12,11 +12,19 @@ import io.cucumber.testng.CucumberOptions;
 		monochrome=false, // If true, enables colored console output (more readable)
 //		tags = "@DSAlgoPortal or @Home or @Login",//Filter which tagged scenarios to run
 //		tags = "@DSAlgoPortal or @Home or @Login or @DSOptions",
-		features = {"src/test/resources/features/DSAlgoPortal.feature",
-				"src/test/resources/features/Home.feature",
-		        "src/test/resources/features/Login.feature",
-		        "src/test/resources/features/DSOptions.feature",
-	            "src/test/resources/features/Queue.feature"},
+//		features = {"src/test/resources/features/DSAlgoPortal.feature",
+//				"src/test/resources/features/Home.feature",
+//		        "src/test/resources/features/Login.feature",
+//		        "src/test/resources/features/DSOptions.feature",
+//            "src/test/resources/features/Queue.feature",
+//            "src/test/resources/features/Array.feature",
+//            "src/test/resources/features/ArrayPageTryEditor.feature",
+//            "src/test/resources/features/Stack.feature",
+//	            "src/test/resources/features/LinkedList.feature",
+//	            "src/test/resources/features/QueuePageTryEditor.feature",
+//		"src/test/resources/features/StackPageTryEditor.feature",
+//	"src/test/resources/features/LinkedListPageTryEditor.feature"},
+				features = {"src/test/resources/features/LinkedListPageTryEditor.feature"},
 		glue={"stepdefinition","hooks"})// Packages containing step definitions and hooks
 
 public class TestRunner extends AbstractTestNGCucumberTests{

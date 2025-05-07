@@ -35,11 +35,11 @@ private WebDriver driver;
 		return driver.getTitle();
 	}
 	
-	public void clickLinkedListPageLinks(String linkText) {
+	public LinkedListPageTryEditorPage clickLinkedListPageLinks(String linkText) {
 		for(WebElement e: LinkedListPageLinks) {
 			if(e.getText().trim().equalsIgnoreCase(linkText)) {
 				e.click();
-				return;
+				return new LinkedListPageTryEditorPage(driver);
 			}
 		}
 		throw new RuntimeException("Link not found: " + linkText);

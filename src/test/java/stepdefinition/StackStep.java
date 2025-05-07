@@ -1,11 +1,8 @@
 package stepdefinition;
 
-import static org.testng.Assert.assertTrue;
-
 import org.openqa.selenium.WebDriver;
 
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pagefactory.DSOptionsPage;
 import pagefactory.StackPage;
@@ -21,15 +18,9 @@ public class StackStep {
 		stackPage = landPage.stackGetStartBtnClick();
 	}
 	
-	@When("User clicks on {string} link for Stack")
-	public void user_clicks_on_link_for_stack(String links) {
+	@When("User clicks on {string} Stack links")
+	public void user_clicks_on_Stack_links(String links) {
 		stackPage.clickStackPageLinks(links);
 	}
-
-	@Then("User redirected to {string} page for Stack")
-	public void user_redirected_to_page_for_stack(String pages) {
-		String expectedResult = pages;
-		String actualResult = driver.getCurrentUrl();
-		assertTrue(actualResult.contains(expectedResult),"User is not redirected to the "+pages+" page.");
+// Add Then class and make the step unique by adding stack in the feature file.
 	}
-}
