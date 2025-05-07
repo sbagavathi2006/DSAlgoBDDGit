@@ -2,6 +2,7 @@ package stepdefinition;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pagefactory.DSAlgoPortalPage;
 import pagefactory.HomePage;
-import pagefactory.LoginPage;
 import pagefactory.RegisterPage;
 import utilities.ConfigReader;
 import utilities.ExcelReader;
@@ -28,115 +28,158 @@ public class RegisterStep {
     private HomePage homePage = new HomePage(driver);
     private RegisterPage registerPage = new RegisterPage(driver);
     Properties prop = new Properties();
-	private String error;
 	
-	private static List<Map<String, String>> testData;
+	private List<Map<String, String>> testData;
 	private static final String sheetName ="DSAlgoRegister";
-	private static final String filePath = "src/test/resources/testdata/DSAlgoRegister.xlsx";
 
-
-	public RegisterStep() {
+    public RegisterStep() {
 		this.prop = new ConfigReader().init_prop();
-       //String filePath = prop.getProperty("excelTestdataPath");
+        String filePath = prop.getProperty("excelTestdataPath");
         ExcelReader reader = new ExcelReader(filePath);
         testData = reader.getDataAll(sheetName);
-	}
+	 }
 	
 	@Given("user is in Register page after clicking register in home page")
 	public void user_is_in_register_page_after_clicking_register_in_home_page() {
 		portalPage.getStartedBtnClick();
         homePage.RegisterLinkClick();
-        }
+          }
 
-	@When("user name and passsword filed will be empty and then click on register")
-	public void user_name_and_passsword_filed_will_be_empty_and_then_click_on_register() {
-		registerPage.clickRegisterWithEmptyFields();
-	}
-	
-	@Then("user see the error message {string} appears below the Username textbox")
-	public void user_see_the_error_message_appears_below_the_username_textbox(String expectedMessage) {
-	    //String actualMessage = registerPage.getUsernameValidationMessage();
-	    //System.out.println("Validation message: " + actualMessage);
-	    //Assert.assertEquals(actualMessage, expectedMessage, "Username validation message mismatch!");
-		String actualError = registerPage.getUsernameFieldValidationMessage();
-        Assert.assertEquals(actualError, "Please fill out this field.");
-	}
-
-   @When("the user enters a Username {string} leaves the Password {string} and Confirm Password {string} fields empty and clicks the Register button")
-	public void user_enters_username_and_leaves_password_and_confirm_password_empty(String username, String password, String confirmPassword) {
-		registerPage.enterUsername(username);
-	    registerPage.enterPassword(password);           // Should be empty
-	    registerPage.enterConfirmPassword(confirmPassword); // Should be empty
-	    registerPage.clickRegisterButton();                   // Attempt to submit form
-	}
-	
-	
-	@Then("the error message {string} appears below the Password textbox")
-	public void error_message_appears_below_password_textbox(String expectedMessage) {
-	   String actualMessage = registerPage.getPasswordFieldValidationMessage();
-	    Assert.assertEquals(actualMessage, expectedMessage, "Password field validation message mismatch!");
-	    
-	}
-	
-	@When("user enters login button on registration page")
+    @When("user enters login button on registration page")
 	public void user_enters_login_button_on_registration_page() {
 		registerPage.clickSignInButton();
-	}
+	      }
 
 	@Then("user should redirected to login page")
 	public void user_should_redirected_to_login_page() {
 		  String signinpagetitle = registerPage.getSignInPageTitle();
 		  Assert.assertTrue(signinpagetitle.contentEquals("Login"));
-	}
-	@When("the user enters username {string}, password {string}, and confirm password {string} and clicks the Register button")
-    public void the_user_enters_credentials_and_clicks_register(String username, String password, String confirmPassword) {
-        registerPage.enterUsername(username);
-        registerPage.enterPassword(password);
-        registerPage.enterConfirmPassword(confirmPassword);
-        registerPage.clickRegisterButton();
-    }
-
-    @Then("the error message {string} should be displayed below the Confirm Password field")
-    public void the_error_message_should_be_displayed(String expectedMessage) {
-        String actualMessage = registerPage.getPasswordFieldValidationMessage();
-        Assert.assertEquals(actualMessage, expectedMessage, "Mismatch in error message for Confirm Password field.");
-    }
+	        }
+	
 	
 	@When("User clicks Register button with username and password and confirm password for validation {string}")
     public void user_clicks_register_button_with_username_and_password_and_confirm_password_for_validation(String validation) {
-        if (testData == null) {
-            ExcelReader reader = new ExcelReader(filePath);//user interactions and form submission
-            testData = reader.getDataAll(sheetName);
-        }
-        //for(Map<String, String> row: testData) {
-        Map<String, String> dataRow = testData.stream()
-            .filter(row -> row.get("validation").equalsIgnoreCase(validation))
-            .findFirst()
-            .orElseThrow(() -> new RuntimeException("No test data found for validation: " + validation));
+		String usernameTestData = null;
+        String passwordTestData = null;
+        String confirmpasswordTestData = null;
+        
+        for( Map<String, String> row : testData) {
+        	String validationTestData = row.get("validation");
+        	 
+        	if(validation.equalsIgnoreCase(validationTestData)) {
+        		usernameTestData = row.get("username");
+        		passwordTestData = row.get("password");
+        		confirmpasswordTestData = row.get("confirmpassword");
+        		break;
+        	      }
+            }
+       if(usernameTestData !=null || passwordTestData !=null || confirmpasswordTestData !=null) {
+           registerPage.enterUsername(usernameTestData);
+           registerPage.enterPassword(passwordTestData);
+           registerPage.enterConfirmPassword(confirmpasswordTestData);
+           registerPage.clickRegisterButton();
+               }
+         }
 
-        String username = dataRow.get("username");
-        String password = dataRow.get("password");
-        String confirmPassword = dataRow.get("confirmPassword");
+   @Then("User gets corresponding messages for register validation {string}")
+   public void user_gets_corresponding_messages_for_register_validation(String validation) {
+         String messageTestData = null;
+    	 String usernameTestData = null;
+         String passwordTestData = null;
+         String confirmpasswordTestData = null;
+         
+         for( Map<String, String> row : testData) {
+         	String validationTestData = row.get("validation");
+         	
+         	if(validation.equalsIgnoreCase(validationTestData)) {
+         		messageTestData = row.get("message");
+        		usernameTestData = row.get("username");
+        		passwordTestData = row.get("password");
+        		confirmpasswordTestData = row.get("confirmpassword");
+        		System.out.println(messageTestData);
+        		break;
+                    }  
+	             }
+               String currentUrl = driver.getCurrentUrl();
+              if(usernameTestData.isEmpty()) {
+            	     //empty user
+                  String alertMessage = registerPage.getEmptyUsernameAlertMsg();
+               	  assertTrue(alertMessage.contains(messageTestData), "Expected success message'" + messageTestData + "' but got '" + alertMessage + "'");	
+               }else if(passwordTestData.isEmpty()) {
+            		
+               	   //registration failed due to empty passowrd
+        	      String alertMesssage = registerPage.getEmptyPasswordAlertMsg();
+        	      assertTrue(alertMesssage.contains(messageTestData), "Expected success message'" + messageTestData + "' but got '" + alertMesssage + "'");
+               }else if(confirmpasswordTestData.isEmpty()) {
+            		
+            		//empty confirm password
+            	  String alertMessage = registerPage.getEmptyConfirmPasswordAlertMsg();
+                  assertTrue(alertMessage.contains(messageTestData), "Expected success message'" + messageTestData + "' but got '" + alertMessage + "'");		
+               }else if(currentUrl.contains("register")) {
+        	  
+        	         //register failed due to the mismatch password error
+        	       String errorMessage = registerPage.getMismatchPasswordError();
+         	       assertTrue(errorMessage.equalsIgnoreCase(messageTestData),
+         	       "Expected error message '" + messageTestData + "' but got '" + errorMessage + "'");
+               }else if(currentUrl.contains("register")){
+        	  
+                    //register shortpassword error
+                  String errorMessage = registerPage.getMismatchPasswordError();
+        	      assertTrue(errorMessage.equalsIgnoreCase(messageTestData),
+        	     "Expected error message '" + messageTestData + "' but got '" + errorMessage + "'");
+               }else if(currentUrl.contains("register")){
+              
+            	   //numaric password error
+            	  String errorMessage = registerPage.getMismatchPasswordError();
+            	  assertTrue(errorMessage.equalsIgnoreCase(messageTestData),
+            	  "Expected error message '" + messageTestData + "' but got '" + errorMessage + "'");	  
+               }else{
+                	 fail("No error,alert,or success message found.");
+                 }
+                	 
+                 }
 
-        registerPage.enterUsername(username);
-        registerPage.enterPassword(password);
-        registerPage.enterConfirmPassword(confirmPassword);
-        registerPage.clickRegisterButton();
-    }
+   @When("User clicks on register button with valid credentials {string}")
+   public void user_clicks_on_register_button_with_valid_credentials(String validation) {
+	  for (Map<String, String> data : testData) {
+	        if (data.get("validation").equalsIgnoreCase(validation)) {
+	            String username = data.get("username");
+	            String password = data.get("password");
+	            String confirmpassword = data.get("confirmpassword");
 
-    @Then("User gets corresponding messages for register validation {string}")
-    public void user_gets_corresponding_messages_for_register_validation(String validation) {
-        String actualMessage = registerPage.getRegisterValidationMessage();//validation application responce
+	             // Handle dynamic username generation
+	            if (validation.equalsIgnoreCase("ValidCredential")) {
+	                username = username + System.currentTimeMillis();  // Makes username unique
+	                
+	              }
 
-        Map<String, String> dataRow = testData.stream()
-            .filter(row -> row.get("validation").equalsIgnoreCase(validation))
-            .findFirst()
-            .orElseThrow(() -> new RuntimeException("No test data found for validation: " + validation));
+	            registerPage.enterUsername(username);
+	            registerPage.enterPassword(password);
+	            registerPage.enterConfirmPassword(confirmpassword);
+	            registerPage.clickRegisterButton();
 
-        String expectedMessage = dataRow.get("expectedMessage");
+	            break;
+	              }
+	            }
+	        }
+  
+   	
+  @Then("User can see the register logged in user name for valid credentials {string}")
+  public void user_can_see_the_register_logged_in_user_name_for_valid_credentials(String validation) {
+   	for (Map<String, String> data : testData) {
+           if (data.get("validation").equalsIgnoreCase(validation)) {
+               String expectedUsername = data.get("username");
+               String displayedUser = registerPage.userId(); // you must implement this
+               assertTrue(displayedUser.contains(expectedUsername), "Logged-in user is displayed correctly");
+               break;
+                   }
+                }
+         }
 
-        Assert.assertEquals(actualMessage, expectedMessage);
-    }  
-	}
-
-	
+  @Then("user should be redirected to Home Page")
+   public void user_should_be_redirected_to_home_page() {
+		String msg = registerPage.getsuccessmsg();
+	    String userid = registerPage.userId();
+		Assert.assertEquals(msg, ("New Account Created. You are logged in as "+ userid.toLowerCase()));
+	         }
+	   }

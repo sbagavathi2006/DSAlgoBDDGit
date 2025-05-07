@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class TreePage {
-	private WebDriver driver; //instance variable
+  private WebDriver driver; //instance variable
 
 	public TreePage(WebDriver driver) {
 		this.driver = driver; //driver is passed from hooks class which is assigned with page class driver 
@@ -104,4 +104,9 @@ public class TreePage {
         	}
 		return null;
 	}
+
+	public void istreequestonspagedisplayed() {
+		((WebElement) treePageLinks).isDisplayed();
+			
+		}
 }
