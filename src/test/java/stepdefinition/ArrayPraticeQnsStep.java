@@ -59,7 +59,7 @@ public class ArrayPraticeQnsStep {
 	public void user_able_to_view_the_questions() {
 		LoggerLoad.info("Validating practice questions are displayed");
 		boolean isDisplayed = practicePage != null && practicePage.isPraticeQnsLinksDisplayed();	    
-	    assertTrue(isDisplayed, "Practice questions are not displayed or not available for this scenario.");		
+	    assertTrue(isDisplayed, "Practice questions are not displayed");		
 	}
 	
 	@Given("User clicks on the pratice questions link")

@@ -167,7 +167,8 @@ public class TreePageTryEditorStep {
 	
 	@Then("the user able to view the tree questions page")
 	public void the_user_able_to_view_the_tree_questions_page() {
-		LoggerLoad.info("Checking if Tree Questions page is displayed");
-		treePage.istreequestonspagedisplayed();
+		LoggerLoad.info("Validating practice questions are displayed");
+		boolean isDisplayed = tryEditor.isPraticeQnsLinksDisplayed();	    
+	    assertTrue(isDisplayed, "Practice questions are not displayed");
 	   }
 }

@@ -1,13 +1,13 @@
 package pagefactory;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-	import utilities.CommonMethods;
 
 public class TreePageTryEditorPage {
 		
@@ -27,7 +27,13 @@ public class TreePageTryEditorPage {
 	 this.driver = driver;
 	 PageFactory.initElements(driver, this);
 	}
-		
+
+	public boolean isPraticeQnsLinksDisplayed() {
+		By practiceLinks = By.xpath("//a[contains(@href,'/question/')]");
+        List<WebElement> elems = driver.findElements(practiceLinks);
+        return !elems.isEmpty() && elems.get(0).isDisplayed();
+	}
+	
    public boolean isRunBtnDisplayed() {
 	return btnRun.isDisplayed();
     }
