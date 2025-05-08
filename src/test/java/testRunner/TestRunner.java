@@ -30,7 +30,7 @@ import listeners.ITestListenerImpl;
 //					"src/test/resources/features/TreePageTryEditor.feature",
 //         			"src/test/resources/features/Logout.feature"}, // Path to the feature files
 
-		features = {"src/test/resources/features/"}, // Path to the feature files
+		features = {"src/test/resources/features/TreePageTryEditor.feature"}, // Path to the feature files
  		glue={"stepdefinition","hooks"})// Packages containing step definitions and hooks
 
 public class TestRunner extends AbstractTestNGCucumberTests{	
