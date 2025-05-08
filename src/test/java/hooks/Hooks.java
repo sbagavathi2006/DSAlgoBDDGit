@@ -7,7 +7,8 @@ import java.util.Properties;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -43,10 +44,13 @@ public class Hooks {
 	}
 	 
 	@Before(order =1)	//Execute second
+//	@Parameters({"browser"})  	 //Inject browser value from testng.xml into this method for parallel and cross browser execution
 	public void launchbrowser() { 	//Launch browser and open the base URL which are fetched from the loaded properties
-		String browsername=prop.getProperty("browser"); 	//get browser name from confg.properties
+		
+//		if(browsername == null || browsername.isEmpty()){		
+//			browsername=prop.getProperty("browser"); }	//get browser name from confg.properties for sequential execution
+		String browsername=prop.getProperty("browser");
 		String urlname=prop.getProperty("url");
-		LoggerLoad.info("Launching browser: " + browsername);
 		driverFactory = new DriverFactory();  	// Initialize the driver factory
 		driver = driverFactory.init_driver(browsername); 	// Launch the browser
 		DriverFactory.getDriver().get(urlname); 	// Navigate to the base URL

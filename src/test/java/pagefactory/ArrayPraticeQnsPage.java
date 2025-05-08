@@ -1,6 +1,7 @@
 package pagefactory;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -40,8 +41,11 @@ public class ArrayPraticeQnsPage {
 	}
 	
 	public boolean isPraticeQnsLinksDisplayed() {
-		return practiceQn1.isDisplayed();
-	}
+		try {
+	        return practiceQn1.isDisplayed();
+	    } catch (NoSuchElementException e) {
+	        return false;
+	    }	}
 	
 	public void clickPracticeQns(String linkText) {
 		switch (linkText.trim().toLowerCase()) {

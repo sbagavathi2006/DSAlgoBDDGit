@@ -16,6 +16,7 @@ import pagefactory.TreePageTryEditorPage;
 import utilities.CommonMethods;
 import utilities.ConfigReader;
 import utilities.ExcelReader;
+import utilities.LoggerLoad;
 import webdriver.DriverFactory;
 
 public class TreePageTryEditorStep {
@@ -34,30 +35,36 @@ public class TreePageTryEditorStep {
         String filePath = prop.getProperty("excelTestdataPath");
         ExcelReader reader = new ExcelReader(filePath);
         testData = reader.getDataAll(sheetName);
+        LoggerLoad.info("Excel data loaded for TreeTryEditor from sheet: " + sheetName);
 	    }
 	
 	 @Given("User is on TreePage after clicking its link in the Tree Page")
 	  public void user_is_on_tree_page_after_clicking_its_link_in_the_tree_page() {
+		  LoggerLoad.info("Navigating to Tree page via Get Started button");
 		  treePage = landPage.treeGetStartBtnClick();
 	  }
 
 	@When("user click the {string} tree link")
 	public void user_click_the_tree_link(String treeSubPage ) {
+	  LoggerLoad.info("User clicks tree sublink: " + treeSubPage);
 	  tryEditor = treePage.clickTreeSubLinks(treeSubPage);
 	  }
 	
 	@Then("user can see tree Try here button")
 	public void user_can_see_tree_try_here_button(){
+	  LoggerLoad.info("Checking if 'Try Here' button is displayed");
 	  tryEditor.isTryHereBtnDisplayed();
 	  }
 	
 	@Given("User is on the {string} tree subpage")
 	public void user_is_on_the_tree_subpage(String treeSubPage) {
+	  LoggerLoad.info("Navigating to tree subpage: " + treeSubPage);
 	  tryEditor = treePage.clickTreeSubLinks(treeSubPage);
 	  }
 	
     @When("the user click tree Try here button")
 	public void the_user_click_tree_try_here_button() {
+	  LoggerLoad.info("User clicks 'Try Here' button");
 	  tryEditor.clickTryHereBtn();
 	  }
 
@@ -65,22 +72,27 @@ public class TreePageTryEditorStep {
 	public void the_user_should_redirected_to_the_try_editor_tree_page() {
 	  String expectedResult = "Assessment";
 	  String actualResult = driver.getTitle();
+	  LoggerLoad.info("Verifying redirection to tryEditor page. Page title: " + actualResult);
 	  assertTrue(actualResult.equals(expectedResult),"User is not in the tryeditor page");
 	  }
 	
 	@Then("The user should able to see tree Run button")
 	public void the_user_should_able_to_see_tree_run_button() {
+	  LoggerLoad.info("Checking if 'Run' button is displayed");
 	  tryEditor.isRunBtnDisplayed();
 	  }
 
     @Given("user is on tryeditor page for {string}")
 	public void user_is_on_tryeditor_page_for(String treeSubPage) {
+	  LoggerLoad.info("Navigating to tryeditor for subpage: " + treeSubPage);
 	  tryEditor = treePage.clickTreeSubLinks(treeSubPage);
 	  tryEditor.clickTryHereBtn();
 	  }
 
 	@When("user click Run button for {string} treeSubPage with code {string}")
     public void user_click_run_button_for_tree_sub_page_with_code(String treeSubPage, String codeValidationsType) {
+		LoggerLoad.info("Preparing to run code on tryEditor for " + treeSubPage + " with validation: " + codeValidationsType);
+		
        String codeTestData = null;
 		
 		for(Map<String, String> row: testData) {
@@ -94,16 +106,20 @@ public class TreePageTryEditorStep {
 			   }
 		    }
 		
-	     if(codeTestData != null) {
+	   if(codeTestData != null) {
+		LoggerLoad.info("Running code:\n" + codeTestData);
 		tryEditor.writeCode(codeTestData);
 		tryEditor.clickRunTryHere();
 		} else {
+			LoggerLoad.error("Test data not found for: " + codeValidationsType);
 			throw new RuntimeException ("Test data not found for:" + codeValidationsType);
 		 } 
 	   }
 
 	@Then("user view message {string} for {string} treeSubPage with code {string}")
 	public void user_view_message_for_tree_sub_page_with_code(String message, String treeSubPage, String codeValidationsType) {
+		LoggerLoad.info("Verifying output message for page: " + treeSubPage + ", validation: " + codeValidationsType);
+
        String expectedTestData = null;
 		
 		for(Map<String, String> row: testData) {
@@ -121,30 +137,37 @@ public class TreePageTryEditorStep {
 		
 		 if(actualMsg == null) {
 	        if (tryEditor.isOutputSuccess()) {  // No alert- should be successful output scenario
-	            //System.out.println("Success output shown as expected: " + expectedTestData);
+				 LoggerLoad.info("Success output shown as expected: " + expectedTestData);
 	        	 assertTrue(tryEditor.isOutputSuccess(),"Success output shown as expected: " + expectedTestData);
-	        } else {  assertTrue(false, "Test failed: No alert appeared and no output was displayed. Expected: " + expectedTestData);}
+	        } else {  
+				LoggerLoad.error("No alert and no output found.");
+	        	assertTrue(false, "Test failed: No alert appeared and no output was displayed. Expected: " + expectedTestData);}
 	    } else if (expectedTestData != null) {
+			LoggerLoad.info("Comparing alert: expected='" + expectedTestData + "', actual='" + actualMsg + "'");
 		    assertTrue(actualMsg.contains(expectedTestData),
 			        "Expected alert message to contain '" + expectedTestData + "' but got '" + actualMsg + "'");
 			} else {
+				LoggerLoad.error("Alert message was received, but expected message was null.");
 			    assertTrue(false, "Test failed: Alert message was received, but expected message was null.");
 			  } 
 	    }
 	
 	@When("User clicks on tree Practice Questions link")
 	public void user_clicks_on_tree_practice_questions_link() {
+		LoggerLoad.info("User clicks on Practice Questions link");
 		tryEditor.clickPracticeQnsLink();
 	}
 	@Then("User is redirected to tree practice page")
 	public void user_is_redirected_to_tree_practice_page() {
 	  String expectedResult = "Practice Questions";
 	  String actualResult = driver.getTitle();
+	  LoggerLoad.info("Verifying redirection to Practice Questions page. Page title: " + actualResult);
 	  assertTrue(actualResult.contains(expectedResult), " User is not on the practice Page");
 	  }
 	
 	@Then("the user able to view the tree questions page")
 	public void the_user_able_to_view_the_tree_questions_page() {
-	treePage.istreequestonspagedisplayed();
+		LoggerLoad.info("Checking if Tree Questions page is displayed");
+		treePage.istreequestonspagedisplayed();
 	   }
 }
