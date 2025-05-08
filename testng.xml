@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="DSAlgoBDD Test Suite">
+<suite name="DSAlgoBDD Test Suite" parallel="tests" thread-count="3">
 <listeners>
     <listener class-name="listeners.ITestListenerImpl"/>
     <!-- This tells TestNG to attach a custom listener to your test suite execution. Let me break it down: -->
@@ -7,8 +7,7 @@
   <test name="DSAlgoBDD Tests">
     <classes>
       <class name="testRunner.TestRunner"/>
-      <class name="testReRunner.FailedRun"/>
-      
+      <class name="testRunner.ReRunner"/>      
     </classes>
   </test>
 </suite>

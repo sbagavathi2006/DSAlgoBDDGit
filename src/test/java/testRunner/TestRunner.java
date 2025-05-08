@@ -1,7 +1,9 @@
 package testRunner;
 
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
+import org.testng.annotations.Parameters;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
@@ -15,7 +17,6 @@ import listeners.ITestListenerImpl;
 		         "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:target/extent-report.html",// Generates readable and HTML reports
 		          "rerun:target/failedrerun.txt" },
 		         monochrome=false, // If true, enables colored console output (more readable)
-//		tags = "@DSAlgoPortal",//Filter which tagged scenarios to run
 //		features = {"src/test/resources/features/DSAlgoPortal.feature",
 //					"src/test/resources/features/Home.feature",
 //					"src/test/resources/features/Login.feature",
@@ -33,6 +34,13 @@ import listeners.ITestListenerImpl;
  		glue={"stepdefinition","hooks"})// Packages containing step definitions and hooks
 
 public class TestRunner extends AbstractTestNGCucumberTests{	
+//	@BeforeTest
+//	@Parameters({"browser"})  	 //Inject browser value from testng.xml into this method for parallel and cross browser execution
+//	public void defineBrowser(String browser) throws Throwable{
+//		DriverFactory.init_driver(browser);
+//		LoggerLoad.info("Browser initalized: " + browser);
+//	}
+	
 	@Override
 	@DataProvider(parallel = false) // Set to true for parallel scenario execution
 	public Object[][] scenarios(){
