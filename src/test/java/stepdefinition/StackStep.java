@@ -18,10 +18,12 @@ public class StackStep {
 	@Given("User is on Stack page after clicks on Get Started button on Stack flex")
 	public void user_is_on_stack_page_after_clicks_on_get_started_button_on_stack_flex() {
 		stackPage = landPage.stackGetStartBtnClick();
+		LoggerLoad.info("User navigated to Stack page.");
 	}
 	
 	@When("User clicks on {string} Stack links")
 	public void user_clicks_on_Stack_links(String links) {
+		LoggerLoad.info("Clicking on Stack link: " + links);
 		stackPage.clickStackPageLinks(links);
 	}
 	@Then("User redirected to stack {string} page")

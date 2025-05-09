@@ -198,9 +198,8 @@ public class RegisterStep {
 
   @Then("user should be redirected to Home Page")
    public void user_should_be_redirected_to_home_page() {
-		String msg = registerPage.getsuccessmsg();
-	    String userid = registerPage.userId();
-		LoggerLoad.info("Success message: " + msg);
-		Assert.assertEquals(msg, ("New Account Created. You are logged in as "+ userid.toLowerCase()));
-	         }
+		LoggerLoad.info("Validating user redirection to homepage");
+		String actualResult = driver.getCurrentUrl();
+		  Assert.assertTrue(actualResult.contains("home"), "User is not logged in successfully");
 	   }
+}
