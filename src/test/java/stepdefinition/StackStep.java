@@ -3,9 +3,11 @@ package stepdefinition;
 import org.openqa.selenium.WebDriver;
 
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pagefactory.DSOptionsPage;
 import pagefactory.StackPage;
+import utilities.LoggerLoad;
 import webdriver.DriverFactory;
 
 public class StackStep {
@@ -22,5 +24,13 @@ public class StackStep {
 	public void user_clicks_on_Stack_links(String links) {
 		stackPage.clickStackPageLinks(links);
 	}
-// Add Then class and make the step unique by adding stack in the feature file.
+	@Then("User redirected to stack {string} page")
+	public void user_redirected_to_stack_page(String pages) {
+		String actualResult = driver.getCurrentUrl();
+		LoggerLoad.info("Validating redirection to page: " + pages + ". Current URL: " + actualResult);
+		if (!actualResult.contains(pages)) {
+			LoggerLoad.error("Redirection failed. Expected URL to contain: " + pages);
+		}
 	}
+	
+}
