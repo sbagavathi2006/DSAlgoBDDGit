@@ -40,3 +40,4 @@ public class ArrayStep {
 		assertTrue(actualResult.contains(pages), "User is not redirected to the " + pages + " page.");
 	}	
 }
+

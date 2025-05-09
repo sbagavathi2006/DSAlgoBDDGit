@@ -3,49 +3,124 @@
 Feature: LinkedListPageTryEditor
 
 Background:
-	Given User is on "<linkedListPage>" page after clicking its link in the Queue Page
+	Given User is in LinkedList page after clicking its link in the LinkedList Page
 	
-  Scenario: Verify User able to see Try here button for "<linkedListSubPage>"
-  	When  User click the Try here button
-    Then User can see view Try here button
-    
-  Scenario: User lands on tryEditor page for "<linkedListSubPage>"
-  	When User click Try here button
-    Then User redirected to the tryEditor page
-    
-  Scenario Outline: User verifies Run button visibility and behavior for different code states of  "<linkedListSubPage>"page
-    Given User is on the try Editor page for "<testCases>"
-    When User click on Run button "<actions>"
-    Then User able to see "<expectedResults>"
+   Scenario Outline: Verify User able to see Try here button for "<linkedListSubPage>"
+  	When  User click the "<linkedListSubPage>" linkedlist link
+    Then User can see linkedList Try here button
+  
     
     Examples:
-  | linkedListSubPage                   | testCase        | action                    | expectedResult                                             |
-  | LinkedList                          | viewRunBtn      | with Try here button      | the Run button displayed                                   |
-  | LinkedList                          | withoutCodeRun  | with empty window         | an appropriate error message in an alert window            |
-  | LinkedList                          | invalidCodeRun  | with invalid code         | an error message NameError: name is not defined on line one|
-  |	LinkedList                          | validCodeRun    | with valid code           | output displayed in the console                            |
-  | Types of Linked List                | viewRunBtn      | with Try here button      | the Run button displayed                                   |
-  | Types of Linked List                | withoutCodeRun  | with empty window         | an appropriate error message in an alert window            |
-  | Types of Linked List                | invalidCodeRun  | with invalid code         | an error message NameError: name is not defined on line one|
-  | Types of Linked List                | validCodeRun    | with valid code           | output displayed in the console                            |
-  | Implement Linked List in Python     | viewRunBtn      | with Try here button      | the Run button displayed                                   |
-  | Implement Linked List in Python     | withoutCodeRun  | with empty window         | an appropriate error message in an alert window            |
-  |	Implement Linked List in Python     | invalidCodeRun  | with invalid code         | an error message NameError: name is not defined on line one|
-  | Implement Linked List in Python     | validCodeRun    | with valid code           | output displayed in the console                            |
-  | Traversal                           | viewRunBtn      | with Try here button      | the Run button displayed                                   |
-  | Traversal                           | withoutCodeRun  | with empty window         | an appropriate error message in an alert window            |
-  | Traversal                           | invalidCodeRun  | with invalid code         | an error message NameError: name is not defined on line one|
-  | Traversal                           | validCodeRun    | with valid code           | output displayed in the console                            |
-  |	Insertion                           | viewRunBtn      | with Try here button      | the Run button displayed                                   |
-  | Insertion                           | withoutCodeRun  | with empty window         | an appropriate error message in an alert window            |
-  | Insertion                           | invalidCodeRun  | with invalid code         | an error message NameError: name is not defined on line one|
-  | Insertion                           | validCodeRun    | with valid code           | output displayed in the console                            |
-  |	Deletion                            | viewRunBtn      | with Try here button      | the Run button displayed                                   |
-  | Deletion                            | withoutCodeRun  | with empty window         | an appropriate error message in an alert window            |
-  | Deletion                            | invalidCodeRun  | with invalid code         | an error message NameError: name is not defined on line one|
-  | Deletion                            | validCodeRun    | with valid code           | output displayed in the console                            | 
+  | linkedListSubPage                 |               
+  | Introduction                      |              
+  | Creating Linked LIst              |
+  | Types of Linked List              |            
+  | Implement Linked List in Python   |    
+  | Traversal                         | 
+  |	Insertion                         | 
+  |	Deletion                          | 
+    
+  Scenario Outline: User lands on tryEditor page for "<linkedListSubPage>"
+  	Given User is on the "<linkedListSubPage>" linkedList subpage
+  	When User click linkedList Try here button
+    Then User redirected to the linkedListtryEditor linkedlist page
+    
+      Examples:
+   | linkedListSubPage                 |               
+  | Introduction                      |              
+  | Creating Linked LIst              |
+  | Types of Linked List              |            
+  | Implement Linked List in Python   |    
+  | Traversal                         | 
+  |	Insertion                         | 
+  |	Deletion                          | 
+    
+  Scenario Outline: User able to see Run button after TryHere button click
+  	Given User is on the "<linkedListSubPage>" linkedList subpage 
+  	When User click linkedList Try here button
+    Then User able to see linkedlist Run button
+    
+    Examples:
+   | linkedListSubPage                 |               
+  | Introduction                      |              
+  | Creating Linked LIst              |
+  | Types of Linked List              |            
+  | Implement Linked List in Python   |    
+  | Traversal                         | 
+  |	Insertion                         | 
+  |	Deletion                          | 
+    
   
-  Scenario: User lands on Practice page
-    Given User is on the Deletion page
-    When User clicks on Practice Questions link 
-    Then User is to redirected to practice page
+  Scenario Outline: User gets message when click on Runbtn with "<codeValidationsType>" code snippet for "<linkedListSubPage>"
+    Given User is on LinkedListtryeditor page for "<linkedListSubPage>"
+    When User click Run button for "<linkedListSubPage>" linkedlistSubPage with code "<codeValidationsType>"
+    Then User view message "<message>" for "<linkedListSubPage>" linkedlistSubPage with code "<codeValidationsType>"
+    
+    Examples:
+    | linkedListSubPage                  | codeValidationsType   |message         	|                 
+  | Introduction                         | EmptyRun   				   | Error						|               
+  | Introduction                         |  InvalidCodeRun       | Error						|              
+  | Introduction                         |  InvalidCodeRun       | Error						|           
+  |	Introduction                         |   ValidCodeRun   		 | OutputDisplayed	|    
+ | Creating Linked LIst                  | EmptyRun              | Error          	|
+ | Creating Linked LIst                  | InvalidCodeRun        | Error	          |
+ |  Creating Linked LIst                 | InvalidCodeRun        | Error	          |
+ | Creating Linked LIst                  | ValidCodeRun          | OutputDisplayed  |
+  | Types of Linked List                 |    EmptyRun   		     | Error					  |        
+  | Types of Linked List                 |    InvalidCodeRun     | Error						|        
+  | Types of Linked List              |    InvalidCodeRun    | Error						|          
+  | Types of Linked List              |    ValidCodeRun      | OutputDisplayed	|        
+  | Implement Linked List in Python   |    EmptyRun   			 | Error						|
+  | Implement Linked List in Python   | InvalidCodeRun       | Error						|  
+  |	Implement Linked List in Python   |   InvalidCodeRun     | Error						| 
+  | Implement Linked List in Python   |   ValidCodeRun   		 | OutputDisplayed	|   
+  | Traversal                         |  EmptyRun   				 | Error						|
+  | Traversal                         | InvalidCodeRun       | Error						|
+  | Traversal                         |  InvalidCodeRun      | Error						|  
+  | Traversal                         | ValidCodeRun   		   | OutputDisplayed	|
+  |	Insertion                         | EmptyRun   				   | Error						|
+  | Insertion                         | InvalidCodeRun       | Error						|
+  | Insertion                         |  InvalidCodeRun      | Error						|
+  | Insertion                         | ValidCodeRun   		   | OutputDisplayed	|
+  |	Deletion                          |  EmptyRun   				 | Error						|
+  | Deletion                          | InvalidCodeRun       | Error						|
+  | Deletion                          | InvalidCodeRun       | Error						|
+  | Deletion                          |  ValidCodeRun   		 | OutputDisplayed	|
+  
+   Scenario Outline: User lands on Practice page
+    Given User is on the "<linkedListSubPage>" linkedList subpage 
+    When User clicks on linkedlist Practice Questions link
+    Then User is redirected to linkedlist practice page
+     
+    Examples:
+   | linkedListSubPage                 |               
+  | Introduction                      |              
+  | Creating Linked LIst              |
+  | Types of Linked List              |            
+  | Implement Linked List in Python   |    
+  | Traversal                         | 
+  |	Insertion                         | 
+  |	Deletion                          | 
+    
+  
+   Scenario Outline: User able to view queue pratice questions
+    Given User is on the "<linkedListSubPage>" linkedList subpage 
+    When User clicks on linkedlist Practice Questions link
+    Then User able to view the questions
+    
+      
+    Examples:
+    | linkedListSubPage                 |               
+  | Introduction                      |              
+  | Creating Linked LIst              |
+  | Types of Linked List              |            
+  | Implement Linked List in Python   |    
+  | Traversal                         | 
+  |	Insertion                         | 
+  |	Deletion                          | 
+    
+    
+    
+    
+    
+    
