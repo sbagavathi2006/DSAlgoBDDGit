@@ -16,7 +16,7 @@ import listeners.ITestListenerImpl;
 		          "rerun:target/failedrerun.txt",
 		          "com.aventstack.chaintest.plugins.ChainTestCucumberListener:"},
 		         monochrome=false, // If true, enables colored console output (more readable)
-		features = {"src/test/resources/features/DataStructurePageTryEditor.feature"}, // Path to the feature files
+		features = {"src/test/resources/features"}, // Path to the feature files
  		glue={"stepdefinition","hooks"})// Packages containing step definitions and hooks
 
 public class TestRunner extends AbstractTestNGCucumberTests{	
