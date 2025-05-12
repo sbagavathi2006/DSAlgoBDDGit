@@ -44,12 +44,12 @@ public class Hooks {
 	}
 	 
 	@Before(order =1)	//Execute second
-//	@Parameters({"browser"})  	 //Inject browser value from testng.xml into this method for parallel and cross browser execution
-	public void launchbrowser() { 	//Launch browser and open the base URL which are fetched from the loaded properties
-		
-//		if(browsername == null || browsername.isEmpty()){		
-//			browsername=prop.getProperty("browser"); }	//get browser name from confg.properties for sequential execution
-		String browsername=prop.getProperty("browser");
+	public void launchbrowser() throws Throwable{ 	//Launch browser and open the base URL which are fetched from the loaded properties
+		String browsername = ConfigReader.getBrowserType(); 
+		if (browsername == null || browsername.isEmpty()) {
+			browsername=prop.getProperty("browser"); 
+		}
+		LoggerLoad.info("browser loaded for setbrowser: "+browsername);
 		String urlname=prop.getProperty("url");
 		driverFactory = new DriverFactory();  	// Initialize the driver factory
 		driver = driverFactory.init_driver(browsername); 	// Launch the browser
@@ -102,7 +102,7 @@ public class Hooks {
 	}
 	
 	@After(order =0) 	// execute last
-	public void quitBrowser() { 	//Quits the browser and removes the thread-local WebDriver instance
+	public static void quitBrowser() { 	//Quits the browser and removes the thread-local WebDriver instance
 		 if (DriverFactory.getDriver() != null) {
 		        DriverFactory.getDriver().quit(); 	// Close the browser
 		        DriverFactory.tlDriver.remove(); 	// Clean up ThreadLocal driver
