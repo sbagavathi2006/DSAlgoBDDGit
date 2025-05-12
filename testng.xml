@@ -7,7 +7,7 @@
   <test name="DSAlgoBDD Tests">
     <classes>
       <class name="testRunner.TestRunner"/>
-      <class name="testRunner.ReRunner"/>      
+      <!-- <class name="testRunner.ReRunner"/>-->
     </classes>
   </test>
 </suite>
